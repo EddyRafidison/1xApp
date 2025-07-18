@@ -5,15 +5,24 @@ document.addEventListener("paste", (e) => e.preventDefault());
 const drawer = document.getElementById("registerDrawer");
 const handle = document.getElementById("registerHandle");
 const iframe = document.getElementById("registerIframe");
+let pad;
+
+iframe.addEventListener('load', () => {
+  const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+  pad = iframeDoc.getElementById('keyboard-padding');
+});
 
 let isOpen = false;
 let timer;
 let inputFocusedY = 0;
-let input_;
+let input_ = null;
 let screenHeightJs = window.innerHeight;
 let ratio;
 let estimatedkeyboardH;
 let keyboardYTop;
+var excludedInputsAutoScroll = ['checkbox', 'date', 'file'];
+let isTyping = false;
+let typingTimer;
 
 function openDrawer() {
   drawer.style.transform = "translateY(0%)";
@@ -40,20 +49,26 @@ handle.addEventListener("touchstart", () => {
 });
 
 handle.addEventListener("touchend", () => clearTimeout(timer));
-window.onViewHeight = function (keyboardHeightJava, screenHeightJava) {
+window.onViewHeight = function(keyboardHeightJava, screenHeightJava) {
+  pad.style.height = "20vh";
   ratio = screenHeightJava / screenHeightJs;
-  estimatedkeyboardH = keyboardHeightJava/ratio;
+  estimatedkeyboardH = keyboardHeightJava / ratio;
   keyboardYTop = (screenHeightJs - estimatedkeyboardH);
   const rect = input_.getBoundingClientRect();
   inputFocusedY = rect.bottom;
   setTimeout(() => {
-    if(keyboardYTop < inputFocusedY){
+    if (keyboardYTop < inputFocusedY) {
+      if (input_ != null) {
         input_.scrollIntoView({ block: "center", behavior: "smooth" });
-      }}, 350);
+      }
+    }
+  }, 350);
 };
-function onKeyboardClosed(){
 
+function onKeyboardClosed() {
+  pad.style.height = "0";
 }
+
 function showToast(message, duration = 3000) {
   const toast = document.createElement("div");
   toast.textContent = message;
@@ -70,35 +85,41 @@ function showToast(message, duration = 3000) {
   toast.style.fontFamily = "sans-serif";
   toast.style.opacity = "0";
   toast.style.transition = "opacity 0.3s ease";
-
+  
   document.body.appendChild(toast);
   requestAnimationFrame(() => {
     toast.style.opacity = "1";
   });
-
+  
   setTimeout(() => {
     toast.style.opacity = "0";
     setTimeout(() => toast.remove(), 300);
   }, duration);
 }
+
 function attachInputFocus() {
-  // Principal document
   document.querySelectorAll("input").forEach((el) => {
     el.addEventListener("focus", () => {
-      input_ = el;
+      const input_type = el.type;
+      if (!excludedInputsAutoScroll.includes(input_type)) {
+        input_ = el;
+      } else {
+        input_ = null;
+      }
     });
   });
-
-  // Iframe
-  const iframe = document.querySelector("iframe");
-  if (!iframe) return;
-
+  
   iframe.addEventListener("load", () => {
     try {
       const doc = iframe.contentDocument || iframe.contentWindow.document;
       doc.querySelectorAll("input").forEach((el) => {
         el.addEventListener("focus", () => {
-          input_ = el;
+          const input_type = el.type;
+          if (!excludedInputsAutoScroll.includes(input_type)) {
+            input_ = el;
+          } else {
+            input_ = null;
+          }
         });
       });
     } catch (e) {
@@ -107,6 +128,7 @@ function attachInputFocus() {
   });
 }
 attachInputFocus();
+
 function enableNextInputOnEnter() {
   function attachEnterKey(inputs) {
     inputs.forEach((el, i) => {
@@ -124,30 +146,60 @@ function enableNextInputOnEnter() {
       el.addEventListener('focus', () => {
         const rect = el.getBoundingClientRect();
         inputFocusedY = rect.bottom;
+        const input_type = el.type;
         setTimeout(() => {
-        if(keyboardYTop < inputFocusedY){
-        el.scrollIntoView({ block: "center", behavior: "smooth" });
-      }}, 350);
+          if (keyboardYTop < inputFocusedY) {
+            if (!excludedInputsAutoScroll.includes(input_type)) {
+              el.scrollIntoView({ block: "center", behavior: "smooth" });
+            } else {
+              input_ = null;
+            }
+          }
+        }, 350);
       });
     });
   }
-
-  // Principal document
+  
   const mainInputs = document.querySelectorAll('input');
   attachEnterKey(mainInputs);
-
-  // Iframe
-  const iframe = document.querySelector('iframe');
-  if (iframe) {
-    iframe.addEventListener('load', () => {
-      try {
-        const doc = iframe.contentDocument || iframe.contentWindow.document;
-        const iframeInputs = doc.querySelectorAll('input');
-        attachEnterKey(iframeInputs);
-      } catch (e) {
-        console.error('Erreur iframe:', e);
-      }
-    });
-  }
+  
+  iframe.addEventListener('load', () => {
+    try {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      const iframeInputs = doc.querySelectorAll('input');
+      attachEnterKey(iframeInputs);
+    } catch (e) {
+      console.error('Erreur iframe:', e);
+    }
+  });
 }
 enableNextInputOnEnter();
+
+function monitorTyping(doc) {
+  doc.querySelectorAll('input').forEach(el => {
+    el.addEventListener('input', () => {
+      const rect = el.getBoundingClientRect();
+      inputFocusedY = rect.bottom;
+      isTyping = true;
+      setTimeout(() => {
+        if (keyboardYTop < inputFocusedY) {
+          el.scrollIntoView({ block: "center", behavior: "smooth" });
+        }
+      }, 350);
+      clearTimeout(typingTimer);
+      typingTimer = setTimeout(() => {
+        isTyping = false;
+      }, 1000);
+    });
+  });
+}
+
+monitorTyping(document);
+iframe.addEventListener('load', () => {
+  try {
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    monitorTyping(iframeDoc);
+  } catch (e) {
+    console.error("Erreur accès iframe :", e);
+  }
+});

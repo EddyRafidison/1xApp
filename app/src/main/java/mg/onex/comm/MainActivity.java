@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
           }
         });
     web.loadUrl(
-        "file:///storage/emulated/0/CodeAssistProjects/One-X/app/src/main/assets/one-x/index.html");
+        "file:///storage/emulated/0/Android/data/io.spck/files/One-X/app/src/main/assets/one-x/index.html");
     web.setWebViewClient(
         new WebViewClient() {
           @Override

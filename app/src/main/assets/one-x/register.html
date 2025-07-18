@@ -1,136 +1,55 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/register_style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.css"
-    />
-  </head>
-  <body>
-    <label for="lastname">Nom :</label>
-    <input
-      class="input"
-      type="text"
-      id="lastname"
-      name="lastname"
-      pattern="[A-Za-z]{20}"
-      autocapitalize="true"
-      maxlength="20"
-      required
-    />
-    <label for="firstname">Prénom(s) :</label>
-    <input
-      class="input"
-      type="text"
-      id="firstname"
-      name="firstname"
-      pattern="[A-Za-z]{20}"
-      autocapitalize="true"
-      maxlength="20"
-      required
-    />
-    <select id="select">
-      <option disabled selected>Genre</option>
-      <option>Homme</option>
-      <option>Femme</option>
-    </select>
-    <label for="dob">Date de naissance :</label>
-    <input
-      class="input"
-      type="date"
-      id="dob"
-      name="dob"
-      max="2007-01-01"
-      required
-    />
-    <label for="addr">Adresse (Quartier, Ville) :</label>
-    <input
-      class="input"
-      type="text"
-      id="addr"
-      name="addr"
-      maxlength="30"
-      required
-    />
-    <label for="country">Pays :</label>
-    <input
-      class="input"
-      type="text"
-      id="country"
-      name="country"
-      pattern="[A-Za-z]{30}"
-      maxlength="30"
-      required
-    />
-    <label for="ncipass">CNI/Passeport + 2 photos recto-verso :</label>
-    <input
-      class="input"
-      type="text"
-      id="ncipass"
-      name="ncipass"
-      maxlength="20"
-      required
-    />
-    <input
-      type="file"
-      class="file"
-      id="files"
-      name="files"
-      accept="image/*"
-      multiple
-    />
-    <label for="mailad">E-mail :</label>
-    <input
-      class="input"
-      type="email"
-      id="mailad"
-      name="mailad"
-      maxlength="40"
-      required
-    />
-    <label for="pswd1">Nouveau mot de passe :</label>
-    <input
-      class="input"
-      type="password"
-      id="pswd1"
-      name="pswd"
-      maxlength="12"
-      required
-    />
-    <label for="pswd2">Confirmer mot de passe :</label>
-    <input
-      class="input"
-      type="password"
-      id="pswd2"
-      name="pswd"
-      maxlength="12"
-      required
-    />
-    <label for="passphr">Phrase secrète :</label>
-    <input
-      class="input"
-      type="text"
-      id="passphr"
-      name="passphr"
-      maxlength="30"
-      required
-    />
-    <div class="terms-text">
-      En cliquant le bouton ci-dessous, vous confirmez vous êtes
-      <b>+18 ans</b> et avez vu et lu nos
-      <a href="terms.html" target="_blank">termes d&apos;utilisateurs</a> et
-      <a href="privacy.html" target="_blank">politiques de vie privée</a>.
-    </div>
-    <button id="signup" class="waves-effect waves-light button">
-      S'inscrire
-    </button>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.js"></script>
-    <script>
-      Waves.init();
-      Waves.attach(".button");
-    </script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles/register_style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.css" />
+</head>
+
+<body>
+  <label for="lastname">Nom :</label>
+  <input class="input" type="text" id="lastname" name="lastname" pattern="[A-Za-z]{20}" autocapitalize="true" maxlength="20" required />
+  <label for="firstname">Prénom(s) :</label>
+  <input class="input" type="text" id="firstname" name="firstname" pattern="[A-Za-z]{20}" autocapitalize="true" maxlength="20" required />
+  <select id="select">
+    <option disabled selected>Genre</option>
+    <option>Homme</option>
+    <option>Femme</option>
+  </select>
+  <label for="dob">Date de naissance :</label>
+  <input class="input" type="date" id="dob" name="dob" max="2007-01-01" required />
+  <label for="addr">Adresse (Quartier, Ville) :</label>
+  <input class="input" type="text" id="addr" name="addr" maxlength="30" required />
+  <label for="country">Pays :</label>
+  <input class="input" type="text" id="country" name="country" pattern="[A-Za-z]{30}" maxlength="30" required />
+  <label for="ncipass">CNI/Passeport + 2 photos recto-verso :</label>
+  <input class="input" type="text" id="ncipass" name="ncipass" maxlength="20" required />
+  <input type="file" class="file" id="files" name="files" accept="image/*" multiple />
+  <label for="mailad">E-mail :</label>
+  <input class="input" type="email" id="mailad" name="mailad" maxlength="40" required />
+  <label for="pswd1">Nouveau mot de passe :</label>
+  <input class="input" type="password" id="pswd1" name="pswd" maxlength="12" required />
+  <label for="pswd2">Confirmer mot de passe :</label>
+  <input class="input" type="password" id="pswd2" name="pswd" maxlength="12" required />
+  <label for="passphr">Phrase secrète :</label>
+  <input class="input" type="text" id="passphr" name="passphr" maxlength="30" required />
+  <div class="terms-text">
+    En cliquant le bouton ci-dessous, vous confirmez vous êtes
+    <b>+18 ans</b> et avez vu et lu nos
+    <a href="terms.html" target="_blank">termes d&apos;utilisateurs</a> et
+    <a href="privacy.html" target="_blank">politiques de vie privée</a>.
+  </div>
+  <button id="signup" class="waves-effect waves-light button">
+    S'inscrire
+  </button>
+  <div id="keyboard-padding" style="height: 0; transition: height 0.3s;"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.js"></script>
+  <script>
+    Waves.init();
+    Waves.attach(".button");
+  </script>
+</body>
+
 </html>
