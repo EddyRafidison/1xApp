@@ -1,18 +1,23 @@
 body {
   margin: 0;
   padding: 2vh;
-  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  background: linear-gradient(to bottom, rgba(0, 123, 255, 0.6), rgba(255, 255, 255, 0.6));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
   height: 100%;
 }
+
 label {
   width: 80vw;
   align-content: start;
   align-self: center;
 }
+
 .input {
   width: 80vw;
   height: 5vh;
@@ -28,6 +33,7 @@ label {
   border-style: inset;
   background-color: rgba(255, 255, 255, 0.9);
 }
+
 select {
   width: 60vw;
   height: 9vh;
@@ -42,6 +48,7 @@ select {
   border-style: inset;
   background-color: rgba(255, 255, 255, 0.9);
 }
+
 .file {
   align-self: center;
   width: 80vw;
@@ -55,6 +62,7 @@ select {
   outline: none;
   background: none;
 }
+
 button {
   display: inline-block;
   overflow: hidden;
@@ -73,14 +81,17 @@ button {
   margin-right: 1.8vh;
   font-size: 3.2vh;
 }
+
 button:focus {
   outline: none;
   box-shadow: none;
 }
+
 button:active {
   outline: none;
   box-shadow: none;
 }
+
 .terms-text {
   text-align: center;
   margin: 1.8vh;
@@ -88,16 +99,20 @@ button:active {
   font-size: 2.7vh;
   line-height: 1.5;
 }
+
 .terms-text b {
   font-weight: bold;
 }
+
 .terms-text a {
   color: #007bff;
   text-decoration: none;
 }
+
 .terms-text a:hover {
   text-decoration: underline;
 }
+
 #keyboard-padding {
   height: 0;
   pointer-events: none;

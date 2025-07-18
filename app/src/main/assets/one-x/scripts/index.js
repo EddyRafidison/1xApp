@@ -49,11 +49,11 @@ handle.addEventListener("touchstart", () => {
 });
 
 handle.addEventListener("touchend", () => clearTimeout(timer));
-window.onViewHeight = function(keyboardHeightJava, screenHeightJava) {
+window.onViewHeight = function(keyboardHeightJava, screenHeightJava, statusBarHeight) {
   pad.style.height = "20vh";
   ratio = screenHeightJava / screenHeightJs;
   estimatedkeyboardH = keyboardHeightJava / ratio;
-  keyboardYTop = (screenHeightJs - estimatedkeyboardH);
+  keyboardYTop = (screenHeightJs - estimatedkeyboardH - statusBarHeight);
   const rect = input_.getBoundingClientRect();
   inputFocusedY = rect.bottom;
   setTimeout(() => {

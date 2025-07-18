@@ -10,9 +10,15 @@ body {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background: linear-gradient(to right, #e0eafc, #cfdef3);
   user-select: none;
   -webkit-user-select: none;
+}
+
+body {
+  background: linear-gradient(to bottom, rgba(0, 123, 255, 0.6), rgba(255, 255, 255, 0.6));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .container {
@@ -79,18 +85,22 @@ body {
   cursor: pointer;
   border: none;
 }
+
 #loginButton {
   background-color: #4caf50;
   color: white;
 }
+
 button:focus {
   outline: none;
   box-shadow: none;
 }
+
 button:active {
   outline: none;
   box-shadow: none;
 }
+
 #registerDrawer {
   position: absolute;
   bottom: 0;
