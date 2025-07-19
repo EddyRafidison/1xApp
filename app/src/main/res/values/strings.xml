@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">One-X</string>
+    <string name="app_name">OneX</string>
+	<string name="no_connection">Pas d\'accès à internet</string>
 </resources>

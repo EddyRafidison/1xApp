@@ -13,6 +13,7 @@ iframe.addEventListener('load', () => {
 });
 
 let isOpen = false;
+let isMainDocument = true;
 let timer;
 let inputFocusedY = 0;
 let input_ = null;
@@ -28,6 +29,7 @@ function openDrawer() {
   drawer.style.transform = "translateY(0%)";
   iframe.style.display = "block";
   isOpen = true;
+  isMainDocument = false;
 }
 
 function closeDrawer() {
@@ -36,6 +38,7 @@ function closeDrawer() {
     iframe.style.display = "none";
   }, 300);
   isOpen = false;
+  isMainDocument = true;
 }
 
 handle.addEventListener("touchstart", () => {
@@ -49,24 +52,29 @@ handle.addEventListener("touchstart", () => {
 });
 
 handle.addEventListener("touchend", () => clearTimeout(timer));
-window.onViewHeight = function(keyboardHeightJava, screenHeightJava, statusBarHeight) {
-  pad.style.height = "20vh";
-  ratio = screenHeightJava / screenHeightJs;
-  estimatedkeyboardH = keyboardHeightJava / ratio;
-  keyboardYTop = (screenHeightJs - estimatedkeyboardH - statusBarHeight);
-  const rect = input_.getBoundingClientRect();
-  inputFocusedY = rect.bottom;
-  setTimeout(() => {
-    if (keyboardYTop < inputFocusedY) {
-      if (input_ != null) {
+window.onViewHeight = function(keyboardHeightJava, screenHeightJava, statusNavBarHeight) {
+  if (input_ != null) {
+    showToast(Android.getLocalizedString());
+    pad.style.height = "20vh";
+    ratio = screenHeightJava / screenHeightJs;
+    estimatedkeyboardH = keyboardHeightJava / ratio;
+    keyboardYTop = ((screenHeightJs - estimatedkeyboardH) - statusNavBarHeight);
+    const rect = input_.getBoundingClientRect();
+    inputFocusedY = rect.bottom;
+    setTimeout(() => {
+      if (keyboardYTop < inputFocusedY) {
         input_.scrollIntoView({ block: "center", behavior: "smooth" });
+        
       }
-    }
-  }, 350);
+    }, 350);
+  }
 };
 
 function onKeyboardClosed() {
   pad.style.height = "0";
+  if (isMainDocument == true && input_ != null) {
+    input_.scrollIntoView({ block: "end", behavior: "smooth" });
+  }
 }
 
 function showToast(message, duration = 3000) {
@@ -183,7 +191,9 @@ function monitorTyping(doc) {
       isTyping = true;
       setTimeout(() => {
         if (keyboardYTop < inputFocusedY) {
-          el.scrollIntoView({ block: "center", behavior: "smooth" });
+          if (!excludedInputsAutoScroll.includes(el.type)) {
+            el.scrollIntoView({ block: "center", behavior: "smooth" });
+          }
         }
       }, 350);
       clearTimeout(typingTimer);

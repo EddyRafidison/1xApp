@@ -2,14 +2,20 @@ package one.x;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -20,6 +26,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import one.x.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,13 +36,36 @@ public class MainActivity extends AppCompatActivity {
   private ValueCallback<Uri[]> mFilePathCallback;
   private ActivityResultLauncher<Intent> filePickerLauncher;
 
+  public class WebAppInterface {
+    Context context;
+
+    WebAppInterface(Context ctx) {
+      context = ctx;
+    }
+
+    @JavascriptInterface
+    public String getLocalizedString() {
+      return context.getString(R.string.app_name);
+    }
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     binding = ActivityMainBinding.inflate(getLayoutInflater());
     View view = binding.getRoot();
     setContentView(view);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      Window window = getWindow();
+      window.setStatusBarColor(ContextCompat.getColor(this, R.color.status_bar_color));
+    }
     web = binding.web;
+    NetworkChecker network_ = new NetworkChecker(this);
+    network_.registerNetworkCallback();
+    registerReceiver(
+        UpdateChecker.onDownloadComplete,
+        new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+    UpdateChecker.checkForUpdate(this);
     WebSettings ws = web.getSettings();
     ws.setJavaScriptEnabled(true);
     ws.setAllowContentAccess(true);
@@ -88,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
           }
         });
+    web.addJavascriptInterface(new WebAppInterface(this), "Android");
     web.loadUrl(
         "file:///storage/emulated/0/Android/data/io.spck/files/One-X/app/src/main/assets/one-x/index.html");
     web.setWebViewClient(
@@ -116,12 +147,16 @@ public class MainActivity extends AppCompatActivity {
                 int screenHeight = rootView.getRootView().getHeight();
                 int visibleHeight = r.height();
                 int keyboardHeight = screenHeight - visibleHeight;
+                int statusBH = getBarHeight("status_bar_height");
+                int navBH = getBarHeight("navigation_bar_height");
                 if (keyboardHeight > screenHeight * 0.15) {
                   String js =
                       "window.onViewHeight && window.onViewHeight("
                           + keyboardHeight
                           + ","
                           + screenHeight
+                          + ","
+                          + (statusBH + navBH)
                           + ");";
                   web.evaluateJavascript(js, null);
                 } else {
@@ -129,5 +164,15 @@ public class MainActivity extends AppCompatActivity {
                 }
               }
             });
+    Utils.showAlertIfNoConnection(this, web);
+  }
+
+  private int getBarHeight(String param) {
+    Resources resources = getResources();
+    int resourceId = resources.getIdentifier(param, "dimen", "android");
+    if (resourceId > 0) {
+      return resources.getDimensionPixelSize(resourceId);
+    }
+    return 0;
   }
 }
