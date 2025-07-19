@@ -54,7 +54,6 @@ handle.addEventListener("touchstart", () => {
 handle.addEventListener("touchend", () => clearTimeout(timer));
 window.onViewHeight = function(keyboardHeightJava, screenHeightJava, statusNavBarHeight) {
   if (input_ != null) {
-    showToast(Android.getLocalizedString());
     pad.style.height = "20vh";
     ratio = screenHeightJava / screenHeightJs;
     estimatedkeyboardH = keyboardHeightJava / ratio;

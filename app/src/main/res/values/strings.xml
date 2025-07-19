@@ -1,4 +1,34 @@
 <resources>
+
     <string name="app_name">OneX</string>
-	<string name="no_connection">Pas d\'accès à internet</string>
+    <string name="no_connection">Pas d\'accès à internet</string>
+    <string name="connect_error">Erreur de connexion</string>
+    <string name="install_error">Impossible d\'installer le fichier</string>
+    <string name="update_available_title">Mise à jour disponible</string>
+    <string name="update_available_text">Une nouvelle version de l\'application est disponible.</string>
+    <string name="install">Installer</string>
+    <string name="download">Télécharger</string>
+    <string name="no_file_picker">Aucune app de sélection de fichiers</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="secrete_phrase">Phrase secrète</string>
+    <string name="connection">Connexion</string>
+    <string name="login">Se connecter</string>
+    <string name="registration">Inscription</string>
+    <string name="signup">S\'inscrire</string>
+    <string name="firstname">Prénom(s)</string>
+    <string name="lastname">Nom</string>
+    <string name="gender">Genre</string>
+    <string name="birth">Date de naissance</string>
+    <string name="address">Adresse (Quartier, Ville)</string>
+    <string name="country">Pays</string>
+    <string name="email">Email</string>
+    <string name="phone">N° Mobile</string>
+    <string name="nci_passp">CNI/Passeport (ID + 2 photos recto-verso)</string>
+    <string name="new_password">Nouveau mot de passe</string>
+    <string name="confirm_password">Confirmer mot de passe</string>
+    <string name="user_agree">En cliquant le bouton ci-dessous, vous confirmez vous êtes <b>+18 ans</b> et avez vu et lu nos <a href="terms.html" target="_blank">termes d\'utilisateurs</a> et <a href="privacy.html" target="_blank">politiques de vie privée</a>.</string>
+    <string name="inputs_required">Tous les champs requis</string>
+    <string name="nv_check_failed">Vérification mise à jour échouée</string>
+
 </resources>

@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
@@ -15,7 +14,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
-import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -36,19 +34,6 @@ public class MainActivity extends AppCompatActivity {
   private ValueCallback<Uri[]> mFilePathCallback;
   private ActivityResultLauncher<Intent> filePickerLauncher;
 
-  public class WebAppInterface {
-    Context context;
-
-    WebAppInterface(Context ctx) {
-      context = ctx;
-    }
-
-    @JavascriptInterface
-    public String getLocalizedString() {
-      return context.getString(R.string.app_name);
-    }
-  }
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -65,7 +50,19 @@ public class MainActivity extends AppCompatActivity {
     registerReceiver(
         UpdateChecker.onDownloadComplete,
         new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-    UpdateChecker.checkForUpdate(this);
+    Intent data_ = getIntent();
+    if (data_ != null) {
+      try {
+        String version = data_.getStringExtra("version");
+        String size = data_.getStringExtra("size");
+        if (!version.isEmpty() && !size.isEmpty()) {
+          UpdateChecker.checkAppVersion(this, version);
+        }
+      } catch (Exception ignored) {
+
+      }
+    }
+
     WebSettings ws = web.getSettings();
     ws.setJavaScriptEnabled(true);
     ws.setAllowContentAccess(true);
@@ -111,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
             } catch (ActivityNotFoundException e) {
               filePathCallback = null;
               Toast.makeText(
-                      MainActivity.this, "Aucune app de sélection de fichiers", Toast.LENGTH_SHORT)
+                      MainActivity.this, getString(R.string.no_file_picker), Toast.LENGTH_SHORT)
                   .show();
               return false;
             }
             return true;
           }
         });
-    web.addJavascriptInterface(new WebAppInterface(this), "Android");
+    web.addJavascriptInterface(new StringsToJS(this), "String");
     web.loadUrl(
         "file:///storage/emulated/0/Android/data/io.spck/files/One-X/app/src/main/assets/one-x/index.html");
     web.setWebViewClient(
