@@ -14,7 +14,7 @@
     <div id="actionBar" class="action-bar" data-i18n="connection"></div>
     
     <form class="form-section" action="/" method="post">
-      <input type="text" id="user" name="user" class="input" data-i18n="username" placeholder="" oninput="this.value = this.value.replace(/[^A-Za-z0-9\-]/g, '').toUpperCase()" required />
+      <input type="text" id="user" name="user" class="input" data-i18n="username" placeholder="" oninput="this.value = this.value.replace(/[^A-Za-z0-9À-ÖØ-öø-ÿ\-]/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase()" required />
       <input type="password" id="pswd" name="pswd" class="input" data-i18n="password" minlength="6" maxlength="12" placeholder="" required />
       
       <div class="checkbox-container">
