@@ -2,6 +2,8 @@ document.addEventListener("contextmenu", (e) => e.preventDefault());
 document.addEventListener("copy", (e) => e.preventDefault());
 document.addEventListener("paste", (e) => e.preventDefault());
 
+//Show message : App.showMessage(msg, status);
+
 const drawer = document.getElementById("registerDrawer");
 const handle = document.getElementById("registerHandle");
 const iframe = document.getElementById("registerIframe");
@@ -24,6 +26,9 @@ let keyboardYTop;
 var excludedInputsAutoScroll = ['checkbox', 'date', 'file'];
 let isTyping = false;
 let typingTimer;
+let lastFocusedMain;
+//JsonLocale['key']
+let JsonLocale = JSON.parse(Locale.getLocale());
 
 function openDrawer() {
   drawer.style.transform = "translateY(0%)";
@@ -71,43 +76,16 @@ window.onViewHeight = function(keyboardHeightJava, screenHeightJava, statusNavBa
 
 function onKeyboardClosed() {
   pad.style.height = "0";
-  if (isMainDocument == true && input_ != null) {
-    input_.scrollIntoView({ block: "end", behavior: "smooth" });
+  if (isMainDocument == true) {
+    lastFocusedMain.scrollIntoView({ block: "end", behavior: "smooth" });
   }
-}
-
-function showToast(message, duration = 3000) {
-  const toast = document.createElement("div");
-  toast.textContent = message;
-  toast.style.position = "fixed";
-  toast.style.top = "5vh";
-  toast.style.left = "50%";
-  toast.style.transform = "translateX(-50%)";
-  toast.style.background = "#333";
-  toast.style.color = "#fff";
-  toast.style.padding = "1.8vh 3.6vh";
-  toast.style.borderRadius = "1vh";
-  toast.style.boxShadow = "0 0.4vh 1.8vh rgba(0,0,0,0.3)";
-  toast.style.zIndex = "9999";
-  toast.style.fontFamily = "sans-serif";
-  toast.style.opacity = "0";
-  toast.style.transition = "opacity 0.3s ease";
-  
-  document.body.appendChild(toast);
-  requestAnimationFrame(() => {
-    toast.style.opacity = "1";
-  });
-  
-  setTimeout(() => {
-    toast.style.opacity = "0";
-    setTimeout(() => toast.remove(), 300);
-  }, duration);
 }
 
 function attachInputFocus() {
   document.querySelectorAll("input").forEach((el) => {
     el.addEventListener("focus", () => {
       const input_type = el.type;
+      lastFocusedMain = el;
       if (!excludedInputsAutoScroll.includes(input_type)) {
         input_ = el;
       } else {
@@ -154,6 +132,9 @@ function enableNextInputOnEnter() {
         const rect = el.getBoundingClientRect();
         inputFocusedY = rect.bottom;
         const input_type = el.type;
+        if (isMainDocument == true) {
+          lastFocusedMain = el;
+        }
         setTimeout(() => {
           if (keyboardYTop < inputFocusedY) {
             if (!excludedInputsAutoScroll.includes(input_type)) {

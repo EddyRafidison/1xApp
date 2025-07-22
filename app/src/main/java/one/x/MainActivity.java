@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -25,7 +26,11 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import one.x.databinding.ActivityMainBinding;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +38,39 @@ public class MainActivity extends AppCompatActivity {
   private WebView web;
   private ValueCallback<Uri[]> mFilePathCallback;
   private ActivityResultLauncher<Intent> filePickerLauncher;
+  private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+
+  public class JSLocale {
+
+    JSLocale() {}
+
+    @JavascriptInterface
+    public String getLocale() {
+      return APP.JsonLocale;
+    }
+  }
+
+  public class JSSnackBar {
+    View v;
+
+    JSSnackBar(View v) {
+      this.v = v;
+    }
+
+    @JavascriptInterface
+    public void showMessage(String msg, String status) {
+      Utils.showMessage(v, msg, status);
+    }
+  }
+
+  public class CountryChecker {
+    CountryChecker() {}
+
+    @JavascriptInterface
+    public String code() {
+      return APP.CountryCode;
+    }
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -50,18 +88,6 @@ public class MainActivity extends AppCompatActivity {
     registerReceiver(
         UpdateChecker.onDownloadComplete,
         new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-    Intent data_ = getIntent();
-    if (data_ != null) {
-      try {
-        String version = data_.getStringExtra("version");
-        String size = data_.getStringExtra("size");
-        if (!version.isEmpty() && !size.isEmpty()) {
-          UpdateChecker.checkAppVersion(this, version);
-        }
-      } catch (Exception ignored) {
-
-      }
-    }
 
     WebSettings ws = web.getSettings();
     ws.setJavaScriptEnabled(true);
@@ -71,6 +97,47 @@ public class MainActivity extends AppCompatActivity {
     ws.setAllowUniversalAccessFromFileURLs(true);
     ws.setDomStorageEnabled(true);
     ws.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+
+    web.addJavascriptInterface(new JSLocale(), "Locale");
+    web.addJavascriptInterface(new JSSnackBar(web), "App");
+    web.addJavascriptInterface(new CountryChecker(), "Country");
+
+    web.loadUrl(
+        "file:///storage/emulated/0/Android/data/io.spck/files/One-X/app/src/main/assets/one-x/index.html");
+
+    web.setWebViewClient(
+        new WebViewClient() {
+          @Override
+          public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return false;
+          }
+
+          @TargetApi(Build.VERSION_CODES.N)
+          @Override
+          public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            return false;
+          }
+
+          @Override
+          public void onPageFinished(WebView view, String url) {
+            view.evaluateJavascript(
+                "window.postMessage(" + JSONObject.quote(APP.JsonLocale) + ", '*');", null);
+            Intent data_ = getIntent();
+            if (data_ != null) {
+              try {
+                String version = data_.getStringExtra("version");
+                String size = data_.getStringExtra("size");
+                if (!version.isEmpty() && !size.isEmpty()) {
+                  UpdateChecker.checkAppVersion(getApplicationContext(), version);
+                } else {
+                  Utils.showMessage(web, getString(R.string.nv_check_failed), "error");
+                }
+              } catch (Exception e) {
+                Utils.showMessage(web, getString(R.string.nv_check_failed), "error");
+              }
+            }
+          }
+        });
     filePickerLauncher =
         registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -115,22 +182,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
           }
         });
-    web.addJavascriptInterface(new StringsToJS(this), "String");
-    web.loadUrl(
-        "file:///storage/emulated/0/Android/data/io.spck/files/One-X/app/src/main/assets/one-x/index.html");
-    web.setWebViewClient(
-        new WebViewClient() {
-          @Override
-          public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            return false;
-          }
-
-          @TargetApi(Build.VERSION_CODES.N)
-          @Override
-          public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-            return false;
-          }
-        });
 
     final View rootView = findViewById(android.R.id.content);
     rootView
@@ -161,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
                 }
               }
             });
-    Utils.showAlertIfNoConnection(this, web);
+    runInternetNetworkChecker();
   }
 
   private int getBarHeight(String param) {
@@ -171,5 +222,28 @@ public class MainActivity extends AppCompatActivity {
       return resources.getDimensionPixelSize(resourceId);
     }
     return 0;
+  }
+
+  private void runInternetNetworkChecker() {
+    scheduler.scheduleAtFixedRate(
+        () -> {
+          if (!APP.isInternetNetworkON) {
+            Utils.showAlertIfNoConnection(getApplicationContext(), web);
+          }
+        },
+        0,
+        30,
+        TimeUnit.SECONDS);
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    if (scheduler != null) scheduler.shutdown();
   }
 }

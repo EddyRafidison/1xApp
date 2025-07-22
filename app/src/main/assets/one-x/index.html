@@ -1,62 +1,59 @@
 <!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Connexion</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/index_style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.css"
-    />
-  </head>
-  <body>
-    <div class="container">
-      <div class="action-bar">Connexion</div>
+<html>
 
-      <div class="form-section">
-        <input
-          type="text"
-          id="user"
-          name="user"
-          class="input"
-          placeholder="Nom d'utilisateur"
-          required
-        />
-        <input
-          type="password"
-          id="pswd"
-          name="pswd"
-          class="input"
-          placeholder="Mot de passe"
-          required
-        />
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="connection"></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles/index_style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.css" />
+</head>
 
-        <div class="checkbox-container">
-          <input type="checkbox" id="forgotPswd" />
-          <label for="forgotPswd">J'ai oublié mon mot de passe</label>
-        </div>
-
-        <button class="waves-effect waves-light button" id="loginButton">
-          Se connecter
-        </button>
+<body>
+  <div class="container">
+    <div id="actionBar" class="action-bar" data-i18n="connection"></div>
+    
+    <form class="form-section" action="/" method="post">
+      <input type="text" id="user" name="user" class="input" data-i18n="username" placeholder="" oninput="this.value = this.value.replace(/[^A-Za-z0-9\-]/g, '').toUpperCase()" required />
+      <input type="password" id="pswd" name="pswd" class="input" data-i18n="password" minlength="6" maxlength="12" placeholder="" required />
+      
+      <div class="checkbox-container">
+        <input type="checkbox" id="forgotPswd" />
+        <label for="forgotPswd" data-i18n="forgotten_pswd"></label>
       </div>
-
-      <div id="registerDrawer">
-        <div id="registerHandle">Inscription</div>
-        <iframe
-          id="registerIframe"
-          src="register.html"
-          height="100%"
-          width="100%"
-        ></iframe>
-      </div>
+      
+      <button type="submit" class="waves-effect waves-light button" id="loginButton" data-i18n="login"></button>
+    </form>
+    
+    <div id="registerDrawer">
+      <div id="registerHandle" data-i18n="registration"></div>
+      <iframe id="registerIframe" src="register.html" height="100%" width="100%"></iframe>
     </div>
-    <script src="scripts/index.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.js"></script>
-    <script>
-      Waves.init();
-      Waves.attach(".button");
-    </script>
-  </body>
+  </div>
+  <script src="scripts/index.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.js"></script>
+  <script>
+    Waves.init();
+    Waves.attach(".button");
+    window.addEventListener("message", (e) => {
+      try {
+        const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const key = el.getAttribute("data-i18n");
+          if (data.main[key]) {
+            if ("placeholder" in el) { el.placeholder = data.main[key]; }
+            else { el.textContent = data.main[key]; }
+          }
+        });
+        const iframe = document.querySelector("iframe");
+        if (iframe?.contentWindow) {
+          iframe.contentWindow.postMessage(data, "*");
+        }
+      } catch (err) {
+        console.error("Failed to parse locale JSON", err);
+      }
+    });
+  </script>
+</body>
+
 </html>

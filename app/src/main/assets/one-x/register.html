@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html>
 
 <head>
   <meta charset="UTF-8" />
@@ -9,46 +9,67 @@
 </head>
 
 <body>
-  <label for="lastname">Nom :</label>
-  <input class="input" type="text" id="lastname" name="lastname" pattern="[A-Za-z]{20}" autocapitalize="true" maxlength="20" required />
-  <label for="firstname">Prénom(s) :</label>
-  <input class="input" type="text" id="firstname" name="firstname" pattern="[A-Za-z]{20}" autocapitalize="true" maxlength="20" required />
-  <select id="select">
-    <option disabled selected>Genre</option>
-    <option>Homme</option>
-    <option>Femme</option>
-  </select>
-  <label for="dob">Date de naissance :</label>
-  <input class="input" type="date" id="dob" name="dob" max="2007-01-01" required />
-  <label for="addr">Adresse (Quartier, Ville) :</label>
-  <input class="input" type="text" id="addr" name="addr" maxlength="30" required />
-  <label for="country">Pays :</label>
-  <input class="input" type="text" id="country" name="country" pattern="[A-Za-z]{30}" maxlength="30" required />
-  <label for="ncipass">CNI/Passeport + 2 photos recto-verso :</label>
-  <input class="input" type="text" id="ncipass" name="ncipass" maxlength="20" required />
-  <input type="file" class="file" id="files" name="files" accept="image/*" multiple />
-  <label for="mailad">E-mail :</label>
-  <input class="input" type="email" id="mailad" name="mailad" maxlength="40" required />
-  <label for="pswd1">Nouveau mot de passe :</label>
-  <input class="input" type="password" id="pswd1" name="pswd" maxlength="12" required />
-  <label for="pswd2">Confirmer mot de passe :</label>
-  <input class="input" type="password" id="pswd2" name="pswd" maxlength="12" required />
-  <label for="passphr">Phrase secrète :</label>
-  <input class="input" type="text" id="passphr" name="passphr" maxlength="30" required />
-  <div class="terms-text">
-    En cliquant le bouton ci-dessous, vous confirmez vous êtes
-    <b>+18 ans</b> et avez vu et lu nos
-    <a href="terms.html" target="_blank">termes d&apos;utilisateurs</a> et
-    <a href="privacy.html" target="_blank">politiques de vie privée</a>.
-  </div>
-  <button id="signup" class="waves-effect waves-light button">
-    S'inscrire
-  </button>
+  <form action="/" method="post">
+    <label for="lastname" data-i18n="lastname"></label>
+    <input class="input" type="text" id="lastname" name="lastname" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '').toUpperCase()" minlength="2" maxlength="20" required />
+    <label for="firstname" data-i18n="firstname"></label>
+    <input class="input" type="text" id="firstname" name="firstname" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '').toUpperCase()" maxlength="20" />
+    <label for="select" data-i18n="gender"></label>
+    <select id="select" name="gender" required>
+      <option data-i18n="male"></option>
+      <option data-i18n="female"></option>
+    </select>
+    <label for="dob" data-i18n="birth"></label>
+    <input class="input" type="date" id="dob" name="dob" max="2007-01-01" required />
+    <label for="addr" data-i18n="address"></label>
+    <input class="input" type="text" id="addr" name="addr" minlength="15" maxlength="50" required />
+    <label for="country" data-i18n="country"></label>
+    <select id="country" name="country" required></select>
+    <label for="ncipass" data-i18n="nci_passp"></label>
+    <input class="input" type="text" id="ncipass" name="ncipass" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase()" minlength="8" maxlength="20" required />
+    <input type="file" class="file" id="files" name="files" accept="image/*" multiple />
+    <label for="mailad" data-i18n="email"></label>
+    <input class="input" type="email" id="mailad" name="mailad" maxlength="40" required />
+    <label for="pswd1" data-i18n="new_password"></label>
+    <input class="input" type="password" id="pswd1" name="pswd" minlength="6" maxlength="12" required />
+    <label for="pswd2" data-i18n="confirm_password"></label>
+    <input class="input" type="password" id="pswd2" name="pswd" minlength="6" maxlength="12" required />
+    <label for="passphr" data-i18n="secrete_phrase"></label>
+    <input class="input" type="text" id="passphr" name="passphr" minlength="10" maxlength="30" required />
+    <div class="terms-text" data-i18n-html="user_agree"></div>
+    <button type="submit" id="signup" class="waves-effect waves-light button" data-i18n="signup"></button>
+  </form>
   <div id="keyboard-padding" style="height: 0; transition: height 0.3s;"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.js"></script>
   <script>
     Waves.init();
     Waves.attach(".button");
+    window.addEventListener("message", (e) => {
+      const data = e.data;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (data.main[key]) {
+          if ("placeholder" in el) el.placeholder = data.main[key];
+          else el.textContent = data.main[key];
+        }
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (data.main[key]) {
+          el.innerHTML = data.main[key];
+        }
+      });
+      const selectCountry = document.getElementById("country");
+      for (const [code, name] of Object.entries(data.countries)) {
+        const option = document.createElement("option");
+        option.value = code;
+        option.textContent = name;
+        if (code === Country.code()) {
+          option.selected = true;
+        }
+        selectCountry.appendChild(option);
+      }
+    });
   </script>
 </body>
 

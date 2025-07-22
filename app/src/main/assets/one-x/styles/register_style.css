@@ -1,4 +1,4 @@
-body {
+body, form {
   margin: 0;
   padding: 2vh;
   background: linear-gradient(to bottom, rgba(0, 123, 255, 0.6), rgba(255, 255, 255, 0.6));
@@ -22,10 +22,10 @@ label {
   width: 80vw;
   height: 5vh;
   margin-top: 1vh;
+  align-self: center;
   margin-bottom: 1.8vh;
   margin-left: 1.8vh;
   margin-right: 1.8vh;
-  align-self: center;
   border-radius: 0.6vh;
   font-size: 3.2vh;
   padding: 1.8vh;
@@ -34,7 +34,7 @@ label {
 }
 
 select {
-  width: 60vw;
+  width: 80vw;
   height: 9vh;
   margin-top: 1vh;
   margin-bottom: 1.8vh;

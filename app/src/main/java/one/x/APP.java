@@ -3,8 +3,10 @@ package one.x;
 import java.util.Locale;
 
 public class APP {
-	public static boolean isNetworkON = false;
-	public static Locale TPLANG = Locale.ENGLISH;
+	public static boolean isInternetNetworkON = false;
+	public static String TPLANG = "en";
+	public static String CountryCode;
+	public static String JsonLocale = "";
     public static String PSWD = "", ID = "";
     public static String BASE_URL = "http://127.0.0.1:5555";
     public static String SIGNIN = BASE_URL + "/app/signin";

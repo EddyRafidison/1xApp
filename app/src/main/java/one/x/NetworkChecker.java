@@ -24,17 +24,17 @@ public class NetworkChecker {
             new ConnectivityManager.NetworkCallback() {
               @Override
               public void onAvailable(@NonNull Network network) {
-                APP.isNetworkON = true;
+                APP.isInternetNetworkON = true;
               }
 
               @Override
               public void onLost(@NonNull Network network) {
-                APP.isNetworkON = false;
+                APP.isInternetNetworkON = false;
               }
             });
       }
     } catch (Exception e) {
-      APP.isNetworkON = false;
+      APP.isInternetNetworkON = false;
     }
   }
 }
