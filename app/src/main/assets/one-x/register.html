@@ -31,11 +31,11 @@
     <label for="mailad" data-i18n="email"></label>
     <input class="input" type="email" id="mailad" name="mailad" maxlength="40" required />
     <label for="pswd1" data-i18n="new_password"></label>
-    <input class="input" type="password" id="pswd1" name="pswd" minlength="6" maxlength="12" required />
+    <input class="input" type="password" id="pswd1" name="pswd" oninput="this.value = this.value.normalize('NFD')" minlength="6" maxlength="12" required />
     <label for="pswd2" data-i18n="confirm_password"></label>
-    <input class="input" type="password" id="pswd2" name="pswd" minlength="6" maxlength="12" required />
+    <input class="input" type="password" id="pswd2" name="pswd" oninput="this.value = this.value.normalize('NFD')" minlength="6" maxlength="12" required />
     <label for="passphr" data-i18n="secrete_phrase"></label>
-    <input class="input" type="text" id="passphr" name="passphr" minlength="10" maxlength="30" required />
+    <input class="input" type="text" id="passphr" name="passphr" oninput="this.value = this.value.normalize('NFD')" minlength="10" maxlength="30" required />
     <div class="terms-text" data-i18n-html="user_agree"></div>
     <button type="submit" id="signup" class="waves-effect waves-light button" data-i18n="signup"></button>
   </form>
