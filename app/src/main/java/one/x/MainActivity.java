@@ -22,6 +22,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
   private ValueCallback<Uri[]> mFilePathCallback;
   private ActivityResultLauncher<Intent> filePickerLauncher;
   private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+  private long lastBackPressTime = 0;
+  private Toast backToast;
 
   public class JSLocale {
 
@@ -213,6 +216,19 @@ public class MainActivity extends AppCompatActivity {
               }
             });
     runInternetNetworkChecker();
+	getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+		@Override
+		public void handleOnBackPressed() {
+			if (lastBackPressTime + 2000 > System.currentTimeMillis()) {
+				if (backToast != null) backToast.cancel();
+				finish(); // Fermer l'activité
+				} else {
+				backToast = Toast.makeText(MainActivity.this, getString(R.string.onExit), Toast.LENGTH_SHORT);
+				backToast.show();
+				lastBackPressTime = System.currentTimeMillis();
+			}
+		}
+	});
   }
 
   private int getBarHeight(String param) {

@@ -10,5 +10,6 @@
 <string name="download">Télécharger</string>
 <string name="no_file_picker">Aucune app de sélection de fichiers</string>
 <string name="nv_check_failed">Vérification mise à jour échouée</string>
+<string name="onExit">Appuyer encore pour quitter</string>
 
 </resources>

@@ -21,7 +21,7 @@
         "nci_passp": "CNI/Passeport (ID + 2 photos recto-verso)",
         "new_password": "Nouveau mot de passe",
         "confirm_password": "Confirmer mot de passe",
-        "user_agree": "En cliquant le bouton ci-dessous, vous confirmez vous êtes <b>+18 ans</b> et avez vu et lu nos <a href=\"terms.html\" target=\"_blank\">termes d'utilisateurs</a> et <a href=\"privacy.html\" target=\"_blank\">politiques de vie privée</a>.",
+        "user_agree": "En cliquant le bouton ci-dessous, vous confirmez vous êtes <b>+18 ans</b> et avez vu et lu nos <a href=\"terms.html\" target=\"_blank\">termes d'utilisateur</a> et <a href=\"privacy.html\" target=\"_blank\">politiques de vie privée</a>.",
         "inputs_required": "Tous les champs requis",
         "nv_check_failed": "Vérification mise à jour échouée",
         "forgotten_pswd": "J'ai oublié mon mot de passe",
