@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 Utils.showMessage(web, getString(R.string.nv_check_failed), "error");
               }
             }
+            binding.loading.setVisibility(View.GONE);
           }
         });
     filePickerLauncher =
@@ -216,19 +217,24 @@ public class MainActivity extends AppCompatActivity {
               }
             });
     runInternetNetworkChecker();
-	getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-		@Override
-		public void handleOnBackPressed() {
-			if (lastBackPressTime + 2000 > System.currentTimeMillis()) {
-				if (backToast != null) backToast.cancel();
-				finish(); // Fermer l'activité
-				} else {
-				backToast = Toast.makeText(MainActivity.this, getString(R.string.onExit), Toast.LENGTH_SHORT);
-				backToast.show();
-				lastBackPressTime = System.currentTimeMillis();
-			}
-		}
-	});
+    getOnBackPressedDispatcher()
+        .addCallback(
+            this,
+            new OnBackPressedCallback(true) {
+              @Override
+              public void handleOnBackPressed() {
+                if (lastBackPressTime + 2000 > System.currentTimeMillis()) {
+                  if (backToast != null) backToast.cancel();
+                  finish(); // Fermer l'activité
+                } else {
+                  backToast =
+                      Toast.makeText(
+                          MainActivity.this, getString(R.string.onExit), Toast.LENGTH_SHORT);
+                  backToast.show();
+                  lastBackPressTime = System.currentTimeMillis();
+                }
+              }
+            });
   }
 
   private int getBarHeight(String param) {
