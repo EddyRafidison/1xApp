@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="styles/home_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/node-waves/0.7.6/waves.min.css" />
+</head>
+
+<body>
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-button" id="menuButton">
+      <i class="fas fa-bars fa-lg"></i>
+    </div>
+    <div class="header-title">Bienvenue</div>
+    <div class="header-button" id="notificationButton">
+      <i class="fas fa-bell fa-lg"></i>
+      <div class="notification-badge">3</div>
+    </div>
+  </header>
+  
+  <!-- Navigation Drawer -->
+  <nav class="nav-drawer" id="navDrawer">
+    <div class="drawer-top">
+      <div class="app-logo">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <div class="app-version">Version 2.4.1</div>
+    </div>
+    <div class="drawer-bottom">
+      <div class="nav-item">
+        <i class="fas fa-key"></i>
+        <span>Gérer mon mot de passe</span>
+      </div>
+      <div class="nav-item">
+        <i class="fas fa-lock"></i>
+        <span>Gérer ma phrase secrète</span>
+      </div>
+      <div class="nav-item">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Quitter cet appareil</span>
+      </div>
+      <div class="nav-item">
+        <i class="fas fa-trash-alt"></i>
+        <span>Supprimer mon compte</span>
+      </div>
+      <div class="nav-item">
+        <i class="fas fa-envelope"></i>
+        <span>Nous contacter</span>
+      </div>
+      <div class="nav-item">
+        <i class="fas fa-file-contract"></i>
+        <span>Termes du service</span>
+      </div>
+      <div class="nav-item">
+        <i class="fas fa-user-shield"></i>
+        <span>Politiques de confidentialité</span>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+  
+  <!-- Main Content -->
+  <main class="main-content" style="align-items: center;">
+    <div class="balance-container">
+      <div class="balance-label">Solde actuel</div>
+      <div class="balance-value">10 000<span class="balance-change">+10%</span></div>
+    </div>
+    
+    <button class="consolidate-btn">
+      <div class="leaf-pattern"></div>
+      Consolider la communauté
+    </button>
+    
+    <div class="tab-container">
+      <div class="tab-header">
+        <div class="tab-option active" data-tab="activities">Activités</div>
+        <div class="tab-option" data-tab="buy">Acheter</div>
+        <div class="tab-option" data-tab="sell">Vendre</div>
+      </div>
+      <div class="tab-content">
+        <iframe class="tab-iframe" id="tabIframe" src="about:blank"></iframe>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Notification Panel -->
+  <div class="notification-panel" id="notificationPanel">
+    <div class="notification-header">Notifications</div>
+    <div class="notification-item">
+      <div class="notification-title">Mise à jour disponible</div>
+      <div class="notification-text">La version 2.5.0 est maintenant disponible</div>
+      <div class="notification-time">Il y a 2 heures</div>
+    </div>
+    <div class="notification-item">
+      <div class="notification-title">Transaction réussie</div>
+      <div class="notification-text">Votre achat de 50 unités a été confirmé</div>
+      <div class="notification-time">Hier, 14:30</div>
+    </div>
+    <div class="notification-item">
+      <div class="notification-title">Nouvelle fonctionnalité</div>
+      <div class="notification-text">Découvrez notre nouveau tableau de bord analytique</div>
+      <div class="notification-time">5 juin, 09:15</div>
+    </div>
+  </div>
+  <script src="scripts/home.js"></script>
+  <script>
+  </script>
+</body>
+
+</html>
