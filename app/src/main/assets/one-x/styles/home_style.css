@@ -19,11 +19,6 @@
         --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    @font-face {
-        font-family: 'BalanceFont';
-        src: url('fonts/balance/subset-GaramondNo4CyrTCY-Ligh.woff') format('woff');
-    }
-    
     body {
         background: linear-gradient(to bottom, rgba(0, 123, 255, 0.6), rgba(255, 255, 255, 0.6));
         background-repeat: no-repeat;
@@ -174,7 +169,6 @@
     .balance-label {
         font-size: 18px;
         color: #685A5A;
-        font-family: 'BalanceFont';
         text-decoration: underline;
         margin-bottom: 8px;
     }
@@ -182,7 +176,6 @@
     .balance-value {
         font-size: 40px;
         font-weight: 700;
-        font-family: 'BalanceFont';
         color: var(--text-dark);
         margin-bottom: 8px;
     }
