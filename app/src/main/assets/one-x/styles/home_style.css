@@ -25,6 +25,7 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
+        max-width: 100%;
         align-items: center;
         min-height: 100vh;
         overflow-x: hidden;
@@ -37,6 +38,7 @@
         justify-content: space-between;
         height: 56px;
         padding: 0 16px;
+        overflow-x: hidden;
         background: var(--background);
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -157,6 +159,7 @@
     /* Main Content */
     .main-content {
         padding: 24px 16px;
+        overflow-x: hidden;
     }
     
     .balance-container {
@@ -190,53 +193,78 @@
     
     .consolidate-btn {
         display: block;
+        height: 8vh;
         width: 90%;
         max-width: 400px;
-        height: 8vh;
-        min-height: 50px;
-        margin: 0 auto 32px;
-        background: var(--success);
-        color: white;
+        margin-bottom: 4vh;
+        text-align: center;
         align-self: center;
         border: none;
-        border-radius: 5px;
+        outline: none;
         font-size: 18px;
-        font-weight: 500;
+        color: rgb(255, 255, 255);
+        background: #0D923F;
         cursor: pointer;
-        transition: var(--transition);
         position: relative;
-        overflow: hidden;
+        z-index: 0;
+        border-radius: 10px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
     }
     
-    .consolidate-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: none;
-        outline: none;
-    }
-    
-    .consolidate-btn:active {
-        transform: translateY(1px);
-        box-shadow: none;
-        outline: none;
-    }
-    
-    .consolidate-btn:focus {
-        transform: translateY(1px);
-        box-shadow: none;
-        outline: none;
-    }
-    
-    .leaf-pattern {
+    .consolidate-btn:before {
+        content: "";
+        background: linear-gradient(45deg,
+                #FF0000,
+                #FF7300,
+                #FFFB00,
+                #48FF00,
+                #00FFD5,
+                #002BFF,
+                #7A00FF,
+                #FF00C8,
+                #FF0000);
         position: absolute;
-        top: 0;
-        left: 0;
-        align-self: center;
+        top: -2px;
+        left: -2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glowing-consolidate-btn 20s linear infinite;
+        transition: opacity 0.3s ease-in-out;
+        border-radius: 10px;
+    }
+    
+    @keyframes glowing-consolidate-btn {
+        0% {
+            background-position: 0 0;
+        }
+        
+        50% {
+            background-position: 400% 0;
+        }
+        
+        100% {
+            background-position: 0 0;
+        }
+    }
+    
+    .consolidate-btn:after {
+        z-index: -1;
+        content: "";
+        position: absolute;
         width: 100%;
         height: 100%;
-        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M30,15 Q40,5 50,15 T70,15 Q80,25 70,35 T70,55 Q60,65 50,55 T30,55 Q20,45 30,35 T30,15" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/></svg>');
-        background-size: 150px;
-        opacity: 0.7;
+        background: #5F82E3;
+        left: 0;
+        top: 0;
+        border-radius: 10px;
     }
+    
     
     /* Tab Layout */
     .tab-container {
