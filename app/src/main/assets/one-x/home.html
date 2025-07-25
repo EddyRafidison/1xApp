@@ -22,10 +22,10 @@
     <div class="header-button" id="menuButton">
       <i class="fas fa-bars fa-lg"></i>
     </div>
-    <div class="header-title">Bienvenue</div>
+    <div class="header-title" data-i18n="welcome"></div>
     <div class="header-button" id="notificationButton">
       <i class="fas fa-bell fa-lg"></i>
-      <div class="notification-badge">3</div>
+      <div class="notification-badge">1</div>
     </div>
   </header>
   
@@ -35,36 +35,36 @@
       <div class="app-logo">
         <i class="fas fa-shield-alt"></i>
       </div>
-      <div class="app-version">Version 2.4.1</div>
+      <div id="app_version" class="app-version">Version 1.0-Starter</div>
     </div>
     <div class="drawer-bottom">
       <div class="nav-item">
         <i class="fas fa-key"></i>
-        <span>Gérer mon mot de passe</span>
+        <span data-i18n="set_pswd"></span>
       </div>
       <div class="nav-item">
         <i class="fas fa-lock"></i>
-        <span>Gérer ma phrase secrète</span>
+        <span data-i18n="set_sp"></span>
       </div>
       <div class="nav-item">
         <i class="fas fa-sign-out-alt"></i>
-        <span>Quitter cet appareil</span>
+        <span data-i18n="quit_device"></span>
       </div>
       <div class="nav-item">
         <i class="fas fa-trash-alt"></i>
-        <span>Supprimer mon compte</span>
+        <span data-i18n="delete_acc"></span>
       </div>
       <div class="nav-item">
         <i class="fas fa-envelope"></i>
-        <span>Nous contacter</span>
+        <span data-i18n="mail_us"></span>
       </div>
       <div class="nav-item">
         <i class="fas fa-file-contract"></i>
-        <span>Termes du service</span>
+        <span data-i18n="terms"></span>
       </div>
       <div class="nav-item">
         <i class="fas fa-user-shield"></i>
-        <span>Politiques de confidentialité</span>
+        <span data-i18n="privacy"></span>
       </div>
     </div>
   </nav>
@@ -75,18 +75,18 @@
   <!-- Main Content -->
   <main class="main-content">
     <div class="balance-container">
-      <div class="balance-label" style="font-family: balance-font, sans-serif;">Solde actuel</div>
-      <div class="balance-value" style="font-family: balance-font, sans-serif">100 000<span class="balance-change">+10%</span></div>
+      <div class="balance-label" style="font-family: balance-font, sans-serif;" data-i18n="balance"></div>
+      <div id="balance_value" class="balance-value" style="font-family: balance-font, sans-serif">0<span class="balance-change">+0%</span></div>
     </div>
     <div style="width: 100vw; align-items: center; align-content: center;">
-      <button class="consolidate-btn" role="button">Consolider la communauté</button>
+      <button class="consolidate-btn" role="button" data-i18n="grow_onex"></button>
     </div>
     
     <div class="tab-container">
       <div class="tab-header">
-        <div class="tab-option active" data-tab="activities">Activités</div>
-        <div class="tab-option" data-tab="buy">Acheter</div>
-        <div class="tab-option" data-tab="sell">Vendre</div>
+        <div class="tab-option active" data-tab="activities" data-i18n="activities"></div>
+        <div class="tab-option" data-tab="buy" data-i18n="buy"></div>
+        <div class="tab-option" data-tab="sell" data-i18n="sell"></div>
       </div>
       <div class="tab-content">
         <iframe class="tab-iframe" id="tabIframe" src="about:blank"></iframe>
@@ -96,25 +96,34 @@
   
   <!-- Notification Panel -->
   <div class="notification-panel" id="notificationPanel">
-    <div class="notification-header">Notifications</div>
+    <div class="notification-header" data-i18n="notification"></div>
     <div class="notification-item">
-      <div class="notification-title">Mise à jour disponible</div>
-      <div class="notification-text">La version 2.5.0 est maintenant disponible</div>
-      <div class="notification-time">Il y a 2 heures</div>
-    </div>
-    <div class="notification-item">
-      <div class="notification-title">Transaction réussie</div>
-      <div class="notification-text">Votre achat de 50 unités a été confirmé</div>
-      <div class="notification-time">Hier, 14:30</div>
-    </div>
-    <div class="notification-item">
-      <div class="notification-title">Nouvelle fonctionnalité</div>
-      <div class="notification-text">Découvrez notre nouveau tableau de bord analytique</div>
-      <div class="notification-time">5 juin, 09:15</div>
+      <div id="notif_title" class="notification-title">Notification</div>
+      <div id="notif_text" class="notification-text">New notification displays here</div>
+      <div id="notif_time" class="notification-time">Time</div>
     </div>
   </div>
   <script src="scripts/home.js"></script>
+  <script src="scripts/index.js"></script>
   <script>
+    window.addEventListener("message", (e) => {
+      try {
+        const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const key = el.getAttribute("data-i18n");
+          if (data.main[key]) {
+            if ("placeholder" in el) { el.placeholder = data.main[key]; }
+            else { el.textContent = data.main[key]; }
+          }
+        });
+        const iframe = document.querySelector("iframe");
+        if (iframe?.contentWindow) {
+          iframe.contentWindow.postMessage(data, "*");
+        }
+      } catch (err) {
+        console.error("Failed to parse locale JSON", err);
+      }
+    });
   </script>
 </body>
 

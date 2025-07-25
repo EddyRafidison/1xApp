@@ -26,7 +26,21 @@
         "nv_check_failed": "Vérification mise à jour échouée",
         "forgotten_pswd": "J'ai oublié mon mot de passe",
         "male": "Mâle",
-        "female": "Femelle"
+        "female": "Femelle",
+        "welcome": "Bienvenue",
+        "set_pswd": "Gérer le mot de passe",
+        "set_sp": "Gérer la phrase secrète",
+        "quit_device": "Quitter cet appareil",
+        "delete_acc": "Supprimer le compte",
+        "mail_us": "Nous contacter",
+        "terms": "Termes du service",
+        "privacy": "Politiques de confidentialité",
+        "balance": "Solde actuel",
+        "grow_onex": "Consolider la communauté",
+        "activities": "Activités",
+        "buy": "Acheter",
+        "sell": "Vendre",
+        "notification": "Notifications"
     },
     "countries": {
         "DZ": "Algérie",
