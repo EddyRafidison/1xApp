@@ -1,6 +1,8 @@
 document.addEventListener("contextmenu", (e) => e.preventDefault());
 document.addEventListener("copy", (e) => e.preventDefault());
 document.addEventListener("paste", (e) => e.preventDefault());
+const right_drawer = document.querySelector('.right-drawer');
+const rd_overlay = document.querySelector('.right-drawer-overlay');
 
 // Navigation Drawer
 const navDrawer = document.getElementById('navDrawer');
@@ -37,6 +39,7 @@ navItems.forEach(item => {
         // Ajoute la sélection à l'item cliqué
         this.classList.add('active');
         closeDrawer();
+        openRDrawer();
     });
 });
 
@@ -114,3 +117,15 @@ tabOptions.forEach(option => {
 
 // Initialiser l'iframe avec l'onglet Activités
 tabOptions[0].click();
+
+function openRDrawer() {
+    right_drawer.classList.add('open');
+    rd_overlay.classList.add('active');
+}
+
+function closeRDrawer() {
+    right_drawer.classList.remove('open');
+    rd_overlay.classList.remove('active');
+}
+
+rd_overlay.addEventListener('click', closeRDrawer);

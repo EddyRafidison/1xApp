@@ -80,6 +80,43 @@
         flex-direction: column;
     }
     
+    .right-drawer {
+        position: fixed;
+        top: 57px;
+        right: 0;
+        height: 100vh;
+        width: 80%;
+        background: var(--surface);
+        transform: translateX(100%);
+        transition: var(--transition);
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .right-drawer.open {
+        transform: translateX(0);
+        box-shadow: -24px 0 24px rgba(0, 0, 0, 0.3);
+    }
+    
+    .right-drawer-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 99;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .right-drawer-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
     .nav-drawer.open {
         transform: translateX(0);
         box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
