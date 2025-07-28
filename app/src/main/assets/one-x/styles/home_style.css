@@ -86,7 +86,7 @@
         right: 0;
         height: 100vh;
         width: 80%;
-        background: var(--surface);
+        background: linear-gradient(to bottom, rgba(0, 123, 255, 0.9), rgba(255, 255, 255, 0.6));
         transform: translateX(100%);
         transition: var(--transition);
         z-index: 100;
@@ -96,7 +96,7 @@
     
     .right-drawer.open {
         transform: translateX(0);
-        box-shadow: -24px 0 24px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
     }
     
     .right-drawer-overlay {

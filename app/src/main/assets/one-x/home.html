@@ -70,7 +70,7 @@
   </nav>
   
   <div class="right-drawer-overlay"></div>
-  <div class="right-drawer">Right Drawer</div>
+  <div class="right-drawer"><iframe id="homeIframe" style="background: transparent;" src="mpswd.html" height="100%" width="100%"></iframe></div>
   <div class="overlay" id="overlay"></div>
   
   <!-- Main Content -->
@@ -104,7 +104,6 @@
       <div id="notif_time" class="notification-time">Time</div>
     </div>
   </div>
-  <script src="scripts/home.js"></script>
   <script>
     window.addEventListener("message", (e) => {
       try {
@@ -116,15 +115,17 @@
             else { el.textContent = data.main[key]; }
           }
         });
-        const iframe = document.querySelector("iframe");
-        if (iframe?.contentWindow) {
-          iframe.contentWindow.postMessage(data, "*");
-        }
+        document.querySelectorAll("iframe").forEach(i => {
+          if (i?.contentWindow) {
+            i.contentWindow.postMessage(data, "*");
+          }
+        });
       } catch (err) {
         console.error("Failed to parse locale JSON", err);
       }
     });
   </script>
+  <script src="scripts/home.js"></script>
 </body>
 
 </html>
