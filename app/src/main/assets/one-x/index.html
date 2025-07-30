@@ -41,24 +41,6 @@
   <script>
     Waves.init();
     Waves.attach(".button");
-    window.addEventListener("message", (e) => {
-      try {
-        const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
-        document.querySelectorAll("[data-i18n]").forEach(el => {
-          const key = el.getAttribute("data-i18n");
-          if (data.main[key]) {
-            if ("placeholder" in el) { el.placeholder = data.main[key]; }
-            else { el.textContent = data.main[key]; }
-          }
-        });
-        const iframe = document.querySelector("iframe");
-        if (iframe?.contentWindow) {
-          iframe.contentWindow.postMessage(data, "*");
-        }
-      } catch (err) {
-        console.error("Failed to parse locale JSON", err);
-      }
-    });
   </script>
 </body>
 

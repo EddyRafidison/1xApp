@@ -17,8 +17,27 @@ document.addEventListener("DOMContentLoaded", function() {
     var excludedInputsAutoScroll = ['checkbox', 'date', 'file'];
     let isTyping = false;
     let typingTimer;
-    //JsonLocale['key']
-    let JsonLocale = JSON.parse(Locale.getLocale());
+    let JsonLocale;
+    
+    window.addEventListener("message", (e) => {
+        try {
+            JsonLocale = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+            document.querySelectorAll("[data-i18n]").forEach(el => {
+                const key = el.getAttribute("data-i18n");
+                if (JsonLocale.main[key]) {
+                    if ("placeholder" in el) { el.placeholder = JsonLocale.main[key]; }
+                    else { el.textContent = JsonLocale.main[key]; }
+                }
+            });
+            document.querySelectorAll("iframe").forEach(i => {
+                if (i?.contentWindow) {
+                    i.contentWindow.postMessage(JsonLocale, "*");
+                }
+            });
+        } catch (err) {
+            console.error("Failed to parse locale JSON", err);
+        }
+    });
     
     iframe.addEventListener('load', () => {
         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
@@ -173,8 +192,20 @@ document.addEventListener("DOMContentLoaded", function() {
             this.classList.add('active');
             closeDrawer();
             const it = item.textContent;
-            if (it.includes("mot de passe")) {
+            if (it.includes(JsonLocale.main['set_pswd'])) {
                 openRDrawer();
+            } else if (it.includes(JsonLocale.main['set_sp'])) {
+                
+            } else if (it.includes(JsonLocale.main['quit_device'])) {
+                
+            } else if (it.includes(JsonLocale.main['delete_acc'])) {
+                
+            } else if (it.includes(JsonLocale.main['mail_us'])) {
+                
+            } else if (it.includes(JsonLocale.main['terms'])) {
+                
+            } else {
+                //privacy
             }
         });
     });

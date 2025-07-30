@@ -27,8 +27,26 @@ var excludedInputsAutoScroll = ['checkbox', 'date', 'file'];
 let isTyping = false;
 let typingTimer;
 let lastFocusedMain;
-//JsonLocale['key']
-let JsonLocale = JSON.parse(Locale.getLocale());
+let JsonLocale;
+
+window.addEventListener("message", (e) => {
+  try {
+    JsonLocale = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (JsonLocale.main[key]) {
+        if ("placeholder" in el) { el.placeholder = JsonLocale.main[key]; }
+        else { el.textContent = JsonLocale.main[key]; }
+      }
+    });
+    const iframe = document.querySelector("iframe");
+    if (iframe?.contentWindow) {
+      iframe.contentWindow.postMessage(JsonLocale, "*");
+    }
+  } catch (err) {
+    console.error("Failed to parse locale JSON", err);
+  }
+});
 
 function openDrawer() {
   drawer.style.transform = "translateY(0%)";
