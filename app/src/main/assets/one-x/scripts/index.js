@@ -32,6 +32,7 @@ let JsonLocale;
 window.addEventListener("message", (e) => {
   try {
     JsonLocale = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+    localStorage.setItem("locale", JSON.stringify(JsonLocale));
     document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
       if (JsonLocale.main[key]) {
@@ -39,10 +40,10 @@ window.addEventListener("message", (e) => {
         else { el.textContent = JsonLocale.main[key]; }
       }
     });
-    const iframe = document.querySelector("iframe");
+    /*const iframe = document.querySelector("iframe");
     if (iframe?.contentWindow) {
       iframe.contentWindow.postMessage(JsonLocale, "*");
-    }
+    }*/
   } catch (err) {
     console.error("Failed to parse locale JSON", err);
   }

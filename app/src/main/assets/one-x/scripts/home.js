@@ -17,11 +17,10 @@ document.addEventListener("DOMContentLoaded", function() {
     var excludedInputsAutoScroll = ['checkbox', 'date', 'file'];
     let isTyping = false;
     let typingTimer;
-    let JsonLocale;
+    let JsonLocale = JSON.parse(localStorage.getItem("locale"));
     
-    window.addEventListener("message", (e) => {
+    window.addEventListener("load", (e) => {
         try {
-            JsonLocale = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
             document.querySelectorAll("[data-i18n]").forEach(el => {
                 const key = el.getAttribute("data-i18n");
                 if (JsonLocale.main[key]) {
@@ -29,11 +28,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     else { el.textContent = JsonLocale.main[key]; }
                 }
             });
-            document.querySelectorAll("iframe").forEach(i => {
-                if (i?.contentWindow) {
-                    i.contentWindow.postMessage(JsonLocale, "*");
+            document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                const key = el.getAttribute('data-i18n-html');
+                if (JsonLocale.main[key]) {
+                    el.innerHTML = JsonLocale.main[key];
                 }
             });
+            
         } catch (err) {
             console.error("Failed to parse locale JSON", err);
         }
@@ -193,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function() {
             closeDrawer();
             const it = item.textContent;
             if (it.includes(JsonLocale.main['set_pswd'])) {
-                openRDrawer();
+                openRDrawer("mpswd.html");
             } else if (it.includes(JsonLocale.main['set_sp'])) {
                 
             } else if (it.includes(JsonLocale.main['quit_device'])) {
@@ -285,7 +286,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Initialiser l'iframe avec l'onglet Activités
     tabOptions[0].click();
     
-    function openRDrawer() {
+    function openRDrawer(htmlSrc) {
+        iframe.src = 'mpswd.html';
         right_drawer.classList.add('open');
         rd_overlay.classList.add('active');
     }

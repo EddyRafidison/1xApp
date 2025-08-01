@@ -50,8 +50,8 @@
   <script>
     Waves.init();
     Waves.attach(".button");
-    window.addEventListener("message", (e) => {
-      const data = e.data;
+    window.addEventListener("load", (e) => {
+      const data = JSON.parse(localStorage.getItem("locale"));
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
         if (data.main[key]) {
