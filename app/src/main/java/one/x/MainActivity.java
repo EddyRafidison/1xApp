@@ -43,16 +43,6 @@ public class MainActivity extends AppCompatActivity {
   private long lastBackPressTime = 0;
   private Toast backToast;
 
-  public class JSLocale {
-
-    JSLocale() {}
-
-    @JavascriptInterface
-    public String getLocale() {
-      return APP.JsonLocale;
-    }
-  }
-
   public class JSSnackBar {
     View v;
 
@@ -101,12 +91,10 @@ public class MainActivity extends AppCompatActivity {
     ws.setDomStorageEnabled(true);
     ws.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
-    web.addJavascriptInterface(new JSLocale(), "Locale");
     web.addJavascriptInterface(new JSSnackBar(web), "App");
     web.addJavascriptInterface(new CountryChecker(), "Country");
 
-    web.loadUrl(
-        "file:///storage/emulated/0/Android/data/io.spck/files/One-X/app/src/main/assets/one-x/index.html");
+    web.loadUrl("file:///storage/emulated/0/1xApp/app/src/main/assets/one-x/index.html");
 
     web.setWebViewClient(
         new WebViewClient() {

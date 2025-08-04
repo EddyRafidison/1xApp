@@ -1,12 +1,12 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("contextmenu", (e) => e.preventDefault());
     document.addEventListener("copy", (e) => e.preventDefault());
     document.addEventListener("paste", (e) => e.preventDefault());
-    
+
     const right_drawer = document.querySelector('.right-drawer');
     const rd_overlay = document.querySelector('.right-drawer-overlay');
     const iframe = document.getElementById("homeIframe");
-    
+
     let pad;
     let inputFocusedY = 0;
     let input_ = null;
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let isTyping = false;
     let typingTimer;
     let JsonLocale = JSON.parse(localStorage.getItem("locale"));
-    
+
     window.addEventListener("load", (e) => {
         try {
             document.querySelectorAll("[data-i18n]").forEach(el => {
@@ -34,38 +34,38 @@ document.addEventListener("DOMContentLoaded", function() {
                     el.innerHTML = JsonLocale.main[key];
                 }
             });
-            
+
         } catch (err) {
             console.error("Failed to parse locale JSON", err);
         }
     });
-    
+
     iframe.addEventListener('load', () => {
         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
         pad = iframeDoc.getElementById('keyboard-padding2');
     });
-    
+
     // Navigation Drawer
     const navDrawer = document.getElementById('navDrawer');
     const menuButton = document.getElementById('menuButton');
     const overlay = document.getElementById('overlay');
     const navItems = document.querySelectorAll('.nav-item');
-    
+
     // Notification Panel
     const notificationButton = document.getElementById('notificationButton');
     const notificationPanel = document.getElementById('notificationPanel');
-    
+
     // Tab Selection
     const tabOptions = document.querySelectorAll('.tab-option');
     const tabIframe = document.getElementById('tabIframe');
-    
+
     // Ouvrir le drawer
     menuButton.addEventListener('click', () => {
         navDrawer.classList.add('open');
         overlay.classList.add('visible');
     });
-    
-    window.onViewHeight = function(keyboardHeightJava, screenHeightJava, statusNavBarHeight) {
+
+    window.onViewHeight = function (keyboardHeightJava, screenHeightJava, statusNavBarHeight) {
         if (input_ != null) {
             pad.style.height = "20vh";
             ratio = screenHeightJava / screenHeightJs;
@@ -76,26 +76,26 @@ document.addEventListener("DOMContentLoaded", function() {
             setTimeout(() => {
                 if (keyboardYTop < inputFocusedY) {
                     input_.scrollIntoView({ block: "center", behavior: "smooth" });
-                    
+
                 }
             }, 350);
         }
     };
-    
+
     function onKeyboardClosed() {
         pad.style.height = "0";
     }
-    
+
     function closeDrawer() {
         navDrawer.classList.remove('open');
         overlay.classList.remove('visible');
     }
-    
+
     function attachInputFocus() {
         iframe.addEventListener("load", () => {
             try {
                 const doc = iframe.contentDocument || iframe.contentWindow.document;
-                doc.querySelectorAll("input").forEach((el) => {
+                doc.querySelectorAll("input, textarea").forEach((el) => {
                     el.addEventListener("focus", () => {
                         const input_type = el.type;
                         if (!excludedInputsAutoScroll.includes(input_type)) {
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
     attachInputFocus();
-    
+
     function enableNextInputOnEnter() {
         function attachEnterKey(inputs) {
             inputs.forEach((el, i) => {
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             });
         }
-        
+
         iframe.addEventListener('load', () => {
             try {
                 const doc = iframe.contentDocument || iframe.contentWindow.document;
@@ -154,9 +154,9 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
     enableNextInputOnEnter();
-    
+
     function monitorTyping(doc) {
-        doc.querySelectorAll('input').forEach(el => {
+        doc.querySelectorAll('input, textarea').forEach(el => {
             el.addEventListener('input', () => {
                 const rect = el.getBoundingClientRect();
                 inputFocusedY = rect.bottom;
@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Fermer en cliquant sur un item ou à l'extérieur
     overlay.addEventListener('click', closeDrawer);
     navItems.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
             // Enlève la sélection précédente
             navItems.forEach(i => i.classList.remove('active'));
             // Ajoute la sélection à l'item cliqué
@@ -196,41 +196,44 @@ document.addEventListener("DOMContentLoaded", function() {
             if (it.includes(JsonLocale.main['set_pswd'])) {
                 openRDrawer("mpswd.html");
             } else if (it.includes(JsonLocale.main['set_sp'])) {
-                
+                openRDrawer("msp.html");
             } else if (it.includes(JsonLocale.main['quit_device'])) {
-                
+                openRDrawer("quit_app.html");
+
             } else if (it.includes(JsonLocale.main['delete_acc'])) {
-                
+                openRDrawer("del_acc.html");
+
             } else if (it.includes(JsonLocale.main['mail_us'])) {
-                
+                openRDrawer("smail.html")
+
             } else if (it.includes(JsonLocale.main['terms'])) {
-                
+
             } else {
                 //privacy
             }
         });
     });
-    
+
     // Gestion des notifications
     notificationButton.addEventListener('click', () => {
         notificationPanel.classList.toggle('open');
     });
-    
+
     // Fermer les notifications en cliquant à l'extérieur
     document.addEventListener('click', (e) => {
         if (!notificationButton.contains(e.target) && !notificationPanel.contains(e.target)) {
             notificationPanel.classList.remove('open');
         }
     });
-    
+
     // Sélection des onglets
     tabOptions.forEach(option => {
-        option.addEventListener('click', function() {
+        option.addEventListener('click', function () {
             // Enlève la sélection précédente
             tabOptions.forEach(opt => opt.classList.remove('active'));
             // Ajoute la sélection à l'onglet cliqué
             this.classList.add('active');
-            
+
             // Change l'iframe en fonction de l'onglet (simulation)
             const tab = this.getAttribute('data-tab');
             switch (tab) {
@@ -282,20 +285,20 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-    
+
     // Initialiser l'iframe avec l'onglet Activités
     tabOptions[0].click();
-    
+
     function openRDrawer(htmlSrc) {
-        iframe.src = 'mpswd.html';
+        iframe.src = htmlSrc;
         right_drawer.classList.add('open');
         rd_overlay.classList.add('active');
     }
-    
+
     function closeRDrawer() {
         right_drawer.classList.remove('open');
         rd_overlay.classList.remove('active');
     }
-    
+
     rd_overlay.addEventListener('click', closeRDrawer);
 });

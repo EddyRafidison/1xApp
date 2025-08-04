@@ -28,7 +28,7 @@
       <div class="notification-badge">1</div>
     </div>
   </header>
-  
+
   <!-- Navigation Drawer -->
   <nav class="nav-drawer" id="navDrawer">
     <div class="drawer-top">
@@ -68,21 +68,22 @@
       </div>
     </div>
   </nav>
-  
+
   <div class="right-drawer-overlay"></div>
-  <div class="right-drawer"><iframe id="homeIframe" style="background: transparent;" height="100%" width="100%"></iframe></div>
+  <div class="right-drawer"><iframe title="Right menu" id="homeIframe" class="right-iframe" background="transparent"></iframe></div>
   <div class="overlay" id="overlay"></div>
-  
+
   <!-- Main Content -->
   <main class="main-content">
     <div class="balance-container">
-      <div class="balance-label" style="font-family: balance-font, sans-serif;" data-i18n="balance"></div>
-      <div id="balance_value" class="balance-value" style="font-family: balance-font, sans-serif">0<span class="balance-change">+0%</span></div>
+      <div class="balance-label" font-family="balance-font, sans-serif;" data-i18n="balance"></div>
+      <div id="balance_value" class="balance-value" font-family="balance-font, sans-serif">0<span
+          class="balance-change">+0%</span></div>
     </div>
-    <div style="width: 100vw; align-items: center; align-content: center;">
-      <button class="consolidate-btn" role="button" data-i18n="grow_onex"></button>
+    <div width="100vw">
+      <button type="button" class="consolidate-btn" data-i18n="grow_onex">Consolidate Community</button>
     </div>
-    
+
     <div class="tab-container">
       <div class="tab-header">
         <div class="tab-option active" data-tab="activities" data-i18n="activities"></div>
@@ -90,11 +91,11 @@
         <div class="tab-option" data-tab="sell" data-i18n="sell"></div>
       </div>
       <div class="tab-content">
-        <iframe class="tab-iframe" id="tabIframe" src="about:blank"></iframe>
+        <iframe title="tabs" class="tab-iframe" id="tabIframe" src="about:blank"></iframe>
       </div>
     </div>
   </main>
-  
+
   <!-- Notification Panel -->
   <div class="notification-panel" id="notificationPanel">
     <div class="notification-header" data-i18n="notification"></div>

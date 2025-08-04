@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change secret phrase</title>
+    <link rel="stylesheet" href="fonts/general/stylesheet.css">
+    <link rel="stylesheet" href="styles/mstyle.css">
+</head>
+
+<body>
+    <form class="password-form" action="/" method="post">
+        <div class="form-text" text-align="left" data-i18n="set_sp_text"></div>
+
+        <input class="form-input" data-i18n="new_secrete_phrase" type="text" id="passphr" name="passphr"
+            oninput="this.value = this.value.normalize('NFD')" placeholder="" minlength="10" maxlength="30" required>
+        <input type="password" name="pswd" id="pswd1" class="form-input" data-i18n="password" placeholder=""
+            oninput="this.value = this.value.normalize('NFD')" minlength="6" maxlength="12" required>
+
+        <button type="submit" class="submit-btn" data-i18n="submit">Submit</button>
+    </form>
+    <div id="keyboard-padding2" height="0" transition="height 0.3s"></div>
+    <script src="scripts/home.js"></script>
+</body>
+
+</html>

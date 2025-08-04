@@ -29,7 +29,7 @@ public class SplashActivity extends AppCompatActivity implements ServerListener 
     APP.TPLANG = Lang;
     APP.JsonLocale =
         Utils.readFileAsString(
-            "/storage/emulated/0/Android/data/io.spck/files/One-X/app/src/main/assets/one-x/locales/"
+            "/storage/emulated/0/1xApp/app/src/main/assets/one-x/locales/"
                 + APP.TPLANG
                 + ".json");
     NetworkChecker network_ = new NetworkChecker(this);
