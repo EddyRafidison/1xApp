@@ -42,7 +42,7 @@
         "buy": "Acheter",
         "sell": "Vendre",
         "notification": "Notifications",
-        "delete_acc_text":"Cette action supprimera une grande partie de vos données importantes, y inclus les informations personnelles et mot de passe, de nos serveurs. La demande de suppression est soumise à notre condition et sera irréversible après la réussite du processus. Toutefois, pour maintenir la bonne continuité du service, certaines ou toute la partie de vos données de transaction seront archivées et devenues strictement notre propriété. Si vous acceptez, veuillez entrer ci-dessous votre mot de passe et soumettre votre demande.",      
+        "delete_acc_text":"Cette action supprimera une grande partie de vos données importantes, y inclus les informations personnelles et mot de passe, de nos serveurs. La demande de suppression est soumise à notre condition et sera irréversible après la réussite du processus. Toutefois, pour maintenir la bonne continuité du service, vos données de transaction seront archivées et devenues strictement notre propriété. Si vous acceptez, veuillez entrer ci-dessous votre mot de passe et soumettre votre demande.",      
         "set_pswd_text": "Vous avez la possibilité de modifier et choisir un mot de passe plus robuste en mélangeant lettres, chiffres et symboles. Il doit être confidentiel.",
         "current_pswd": "Mot de passe actuel",
         "set_sp_text": "La phrase secrète vous aide à récupérer votre compte en cas de mot de passe oublié. Elle ne doit jamais être partagée.",
