@@ -310,8 +310,10 @@
     /* Tab Layout */
     .tab-container {
         width: 100%;
-        border-radius: 12px;
+        padding: 10px;
+        border-radius: 10px;
         overflow: hidden;
+        background-color: var(--surface);
         box-shadow: var(--shadow);
     }
 

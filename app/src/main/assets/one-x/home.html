@@ -28,7 +28,6 @@
       <div class="notification-badge">1</div>
     </div>
   </header>
-
   <!-- Navigation Drawer -->
   <nav class="nav-drawer" id="navDrawer">
     <div class="drawer-top">
@@ -38,6 +37,14 @@
       <div id="app_version" class="app-version">Version 1.0-Starter</div>
     </div>
     <div class="drawer-bottom">
+      <div class="nav-item">
+        <i class="fas fa-shopping-cart"></i>
+        <span data-i18n="buy">Acheter</span>
+      </div>
+      <div class="nav-item">
+        <i class="fas fa-hand-holding-usd"></i>
+        <span data-i18n="sell">Vendre</span>
+      </div>
       <div class="nav-item">
         <i class="fas fa-key"></i>
         <span data-i18n="set_pswd"></span>
@@ -70,7 +77,8 @@
   </nav>
 
   <div class="right-drawer-overlay"></div>
-  <div class="right-drawer"><iframe title="Right menu" id="homeIframe" class="right-iframe" background="transparent"></iframe></div>
+  <div class="right-drawer"><iframe title="Right menu" id="homeIframe" class="right-iframe"
+      background="transparent"></iframe></div>
   <div class="overlay" id="overlay"></div>
 
   <!-- Main Content -->
@@ -80,11 +88,11 @@
       <div id="balance_value" class="balance-value" font-family="balance-font, sans-serif">0<span
           class="balance-change">+0%</span></div>
     </div>
-    <div width="100vw">
-      <button type="button" class="consolidate-btn" data-i18n="grow_onex">Consolidate Community</button>
-    </div>
 
     <div class="tab-container">
+      <div width="100vw">
+        <button type="button" class="consolidate-btn" data-i18n="grow_onex">Consolidate Community</button>
+      </div>
       <div class="tab-header">
         <div class="tab-option active" data-tab="activities" data-i18n="activities"></div>
         <div class="tab-option" data-tab="buy" data-i18n="buy"></div>

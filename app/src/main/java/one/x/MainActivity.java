@@ -65,6 +65,16 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  public class OpenLink {
+    OpenLink() {}
+
+    @JavascriptInterface
+    public void open(String link) {
+      Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+      startActivity(browserIntent);
+    }
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -93,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
     web.addJavascriptInterface(new JSSnackBar(web), "App");
     web.addJavascriptInterface(new CountryChecker(), "Country");
+	web.addJavascriptInterface(new OpenLink(), "Browser");
 
     web.loadUrl("file:///storage/emulated/0/1xApp/app/src/main/assets/one-x/index.html");
 
