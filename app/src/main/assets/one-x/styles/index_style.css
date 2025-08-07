@@ -14,7 +14,8 @@ body {
   -webkit-user-select: none;
 }
 
-body, form {
+body,
+form {
   background: linear-gradient(to bottom, rgba(0, 123, 255, 0.6), rgba(255, 255, 255, 0.6));
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -30,63 +31,69 @@ body, form {
 }
 
 .action-bar {
-  height: 8vh;
+  height: 58px;
   background-color: #2196f3;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3.4vh;
+  font-size: 16px;
   font-weight: bold;
 }
 
 .form-section {
   flex: 1;
   display: flex;
-  margin: 3.6vw;
+  margin: 20px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .input {
-  width: 80vw;
-  height: 8vh;
-  margin-top: 1vh;
-  margin-bottom: 1.8vh;
-  margin-left: 1.8vh;
-  margin-right: 1.8vh;
+  width: 280px;
+  height: 56px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
   align-self: center;
-  border-radius: 0.6vh;
-  font-size: 3.2vh;
-  padding: 1.8vh;
-  border: 0.2vh solid #CCCCCC00;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 8px;
+  border: 3px solid #CCCCCC00;
   border-style: inset;
 }
 
 .checkbox-container {
   display: flex;
   align-items: center;
-  margin-bottom: 3.6vh;
+  margin-bottom: 18px;
 }
 
 .checkbox-container label {
-  margin-left: 1.8vh;
+  margin-left: 8px;
+}
+
+label {
+  text-align: left;
+  font-size: 14px;
 }
 
 .button {
   display: inline-block;
   overflow: hidden;
   position: relative;
-  width: 80vw;
-  height: 8vh;
-  border-radius: 4vh;
-  font-size: 3.2vh;
+  width: 280px;
+  height: 56px;
+  border-radius: 20px;
+  font-size: 15px;
   color: white;
   text-align: center;
   cursor: pointer;
   background-color: #4caf50;
-  border: none;;
+  border: none;
+  ;
 }
 
 button:focus {
@@ -105,27 +112,27 @@ button:active {
   width: 100%;
   height: 100%;
   background-color: #ffffff;
-  transform: translateY(calc(100% - 9vh));
+  transform: translateY(calc(100% - 59px));
   transition: transform 0.4s ease-in-out;
-  border-top-left-radius: 3.6vh;
-  border-top-right-radius: 3.6vh;
-  box-shadow: 0 -0.7vh 3.6vh rgba(0, 0, 0, 0.2);
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.2);
   z-index: 99;
   display: flex;
   flex-direction: column;
 }
 
 #registerHandle {
-  height: 8vh;
+  height: 58px;
   background-color: #2196f3;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 3.4vh;
+  font-size: 16px;
   font-weight: bold;
-  border-top-left-radius: 3.6vh;
-  border-top-right-radius: 3.6vh;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
   cursor: pointer;
   touch-action: manipulation;
 }
