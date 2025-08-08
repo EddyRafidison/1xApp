@@ -1,3 +1,6 @@
+    html {
+    font-size: 16px;
+    }
     * {
         margin: 0;
         padding: 0;
@@ -35,8 +38,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 56px;
-        padding: 0 16px;
+        height: 4em;
+        padding: 0 1rem;
         overflow-x: hidden;
         background: var(--background);
         background-repeat: no-repeat;
@@ -83,7 +86,7 @@
 
     .right-drawer {
         position: fixed;
-        top: 56px;
+        top: 3.8em;
         right: 0;
         height: 100vh;
         width: 80%;
@@ -131,8 +134,9 @@
     .drawer-top {
         height: 25vh;
         min-height: 150px;
+        max-height: 250px;
         background: var(--primary-light);
-        padding: 24px 16px;
+        padding: 1.5em 1em;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
@@ -140,12 +144,12 @@
     }
 
     .app-logo {
-        font-size: 32px;
-        margin-bottom: 8px;
+        font-size: 2rem;
+        margin-bottom: 0.5em;
     }
 
     .app-version {
-        font-size: 14px;
+        font-size: 1rem;
         opacity: 0.9;
     }
 
@@ -157,7 +161,7 @@
     .nav-item {
         display: flex;
         align-items: center;
-        padding: 16px;
+        padding: 1em;
         color: var(--text-dark);
         border-bottom: 1px solid var(--divider);
         transition: var(--transition);
@@ -165,8 +169,8 @@
     }
 
     .nav-item i {
-        margin-right: 16px;
-        width: 24px;
+        margin-right: 1rem;
+        width: 1.5em;
         text-align: center;
         color: var(--text-light);
     }
@@ -200,55 +204,55 @@
 
     /* Main Content */
     .main-content {
-        padding: 24px 16px;
+        padding: 1.5em 1em;
         overflow-x: hidden;
     }
 
     .balance-container {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 1.3em;
     }
 
     .balance-label {
-        font-size: 18px;
+        font-size: 1.1rem;
         color: #685A5A;
         text-decoration: underline;
-        margin-bottom: 8px;
+        margin-bottom: 0.5em;
     }
 
     .balance-value {
-        font-size: 40px;
+        font-size: 2.5rem;
         font-weight: 700;
         color: var(--text-dark);
-        margin-bottom: 8px;
+        margin-bottom: 0.5em;
     }
 
     .balance-change {
         display: inline-block;
         background-color: var(--success);
         color: white;
-        padding: 4px 8px;
-        border-radius: 12px;
-        font-size: 12px;
+        padding: 0.25em 0.5em;
+        border-radius: 0.8em;
+        font-size: 0.8rem;
         font-weight: bold;
     }
 
     .consolidate-btn {
         display: block;
-        height: 8vh;
+        height: 3.4em;
         width: 100%;
-        margin-bottom: 4vh;
+        margin-bottom: 1.5em;
         text-align: center;
         align-self: center;
         border: none;
         outline: none;
-        font-size: 18px;
+        font-size: 1.1rem;
         color: rgb(255, 255, 255);
         background: #0D923F;
         cursor: pointer;
         position: relative;
         z-index: 0;
-        border-radius: 10px;
+        border-radius: 0.8em;
         user-select: none;
         -webkit-user-select: none;
         touch-action: manipulation;
@@ -324,7 +328,7 @@
 
     .tab-option {
         flex: 1;
-        padding: 16px;
+        padding: 1em;
         text-align: center;
         font-weight: 500;
         color: var(--text-light);
@@ -354,9 +358,8 @@
 
     .tab-content {
         background-color: var(--surface);
-        height: 40vh;
-        min-height: 300px;
-        padding: 16px;
+        height: 30vh;
+        padding: 1em;
     }
 
     .tab-iframe {
@@ -379,7 +382,7 @@
     /* Notification Panel */
     .notification-panel {
         position: fixed;
-        top: 56px;
+        top: 4em;
         right: 0;
         width: 300px;
         max-width: 90vw;
@@ -389,7 +392,7 @@
         transform: translateX(100%);
         transition: var(--transition);
         z-index: 50;
-        max-height: calc(100vh - 56px);
+        max-height: calc(100vh - 4em);
         overflow-y: auto;
     }
 
@@ -398,14 +401,14 @@
     }
 
     .notification-header {
-        padding: 16px;
+        padding: 1em;
         border-bottom: 1px solid var(--divider);
         font-weight: 500;
         color: var(--text-dark);
     }
 
     .notification-item {
-        padding: 16px;
+        padding: 1em;
         border-bottom: 1px solid var(--divider);
         color: var(--text-dark);
     }
@@ -420,7 +423,7 @@
     }
 
     .notification-time {
-        font-size: 12px;
+        font-size: 0.8rem;
         color: var(--text-light);
     }
 
@@ -433,7 +436,7 @@
         background-color: var(--notification-badge);
         color: white;
         border-radius: 50%;
-        font-size: 12px;
+        font-size: 0.8rem;
         display: flex;
         align-items: center;
         justify-content: center;

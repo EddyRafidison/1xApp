@@ -4,7 +4,9 @@
   box-sizing: border-box;
   font-family: "Segoe UI", sans-serif;
 }
-
+html {
+font-size: 16px;
+}
 html,
 body {
   height: 100%;
@@ -31,63 +33,60 @@ form {
 }
 
 .action-bar {
-  height: 58px;
+ font-size: 1.1rem;
+  height: 4em;
   background-color: #2196f3;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
   font-weight: bold;
 }
 
 .form-section {
   flex: 1;
   display: flex;
-  margin: 20px;
+  margin: 1.1em;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .input {
-  width: 280px;
-  height: 56px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  margin-left: 8px;
-  margin-right: 8px;
+  width: 17em;
+  height: 3.8em;
+  margin: 0.5em;
   align-self: center;
-  border-radius: 5px;
-  font-size: 14px;
-  padding: 8px;
-  border: 3px solid #CCCCCC00;
+  border-radius: 0.4em;
+  font-size: 1rem;
+  padding: 0.5em;
+  border: 0.2em solid #CCCCCC00;
   border-style: inset;
 }
 
 .checkbox-container {
   display: flex;
   align-items: center;
-  margin-bottom: 18px;
+  margin-bottom: 1.1em;
 }
 
 .checkbox-container label {
-  margin-left: 8px;
+  margin-left: 0.5em;
 }
 
 label {
   text-align: left;
-  font-size: 14px;
+  font-size: 1rem;
 }
 
 .button {
   display: inline-block;
   overflow: hidden;
   position: relative;
-  width: 280px;
-  height: 56px;
-  border-radius: 20px;
-  font-size: 15px;
+  width: 17em;
+  height: 3.8em;
+  border-radius: 1.1em;
+  font-size: 1.1rem;
   color: white;
   text-align: center;
   cursor: pointer;
@@ -112,27 +111,27 @@ button:active {
   width: 100%;
   height: 100%;
   background-color: #ffffff;
-  transform: translateY(calc(100% - 59px));
+  transform: translateY(calc(100% - 4em));
   transition: transform 0.4s ease-in-out;
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
-  box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.2);
+  border-top-left-radius: 3.8em;
+  border-top-right-radius: 3.8em;
+  box-shadow: 0 -0.2em 3.8em rgba(0, 0, 0, 0.2);
   z-index: 99;
   display: flex;
   flex-direction: column;
 }
 
 #registerHandle {
-  height: 58px;
+  height: 4em;
   background-color: #2196f3;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 16px;
+  font-size: 1.1rem;
   font-weight: bold;
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
+  border-top-left-radius: 3.4em;
+  border-top-right-radius: 3.4em;
   cursor: pointer;
   touch-action: manipulation;
 }

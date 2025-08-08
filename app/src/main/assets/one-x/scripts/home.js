@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
     statusNavBarHeight
   ) {
     if (input_ != null) {
-      pad.style.height = "20vh";
+      pad.style.height = "10vh";
       ratio = screenHeightJava / screenHeightJs;
       estimatedkeyboardH = keyboardHeightJava / ratio;
       keyboardYTop = screenHeightJs - estimatedkeyboardH - statusNavBarHeight;
@@ -293,7 +293,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Initialiser l'iframe avec l'onglet Activités
+  //Initialiser iframe avec onglet Activités
+  
   tabOptions[0].click();
 
   function openRDrawer(htmlSrc) {

@@ -56,7 +56,7 @@ function openDrawer() {
 }
 
 function closeDrawer() {
-  drawer.style.transform = "translateY(calc(100% - 59px))";
+  drawer.style.transform = "translateY(calc(100% - 4em))";
   setTimeout(() => {
     iframe.style.display = "none";
   }, 300);
