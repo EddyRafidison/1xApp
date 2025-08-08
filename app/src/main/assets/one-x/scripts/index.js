@@ -78,7 +78,7 @@ handle.addEventListener("touchend", () => clearTimeout(timer));
 window.onViewHeight = function (
   keyboardHeightJava,
   screenHeightJava,
-  statusNavBarHeight
+  statusNavBarHeight,
 ) {
   if (input_ != null) {
     ratio = screenHeightJava / screenHeightJs;

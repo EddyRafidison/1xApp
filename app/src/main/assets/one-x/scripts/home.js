@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.onViewHeight = function (
     keyboardHeightJava,
     screenHeightJava,
-    statusNavBarHeight
+    statusNavBarHeight,
   ) {
     if (input_ != null) {
       pad.style.height = "10vh";
@@ -294,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   //Initialiser iframe avec onglet Activités
-  
+
   tabOptions[0].click();
 
   function openRDrawer(htmlSrc) {

@@ -1,119 +1,148 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="styles/home_style.css" />
+    <link rel="stylesheet" href="fonts/general/stylesheet.css" />
+    <link rel="stylesheet" href="fonts/balance/stylesheet.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "general", sans-serif;
+      }
+    </style>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-  <link rel="stylesheet" href="styles/home_style.css">
-  <link rel="stylesheet" href="fonts/general/stylesheet.css">
-  <link rel="stylesheet" href="fonts/balance/stylesheet.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    body {
-      font-family: 'general', sans-serif;
-    }
-  </style>
-</head>
+  <body>
+    <!-- App Header -->
+    <header class="app-header">
+      <div class="header-button" id="menuButton">
+        <i class="fas fa-bars fa-lg"></i>
+      </div>
+      <div class="header-title" data-i18n="welcome"></div>
+      <div class="header-button" id="notificationButton">
+        <i class="fas fa-bell fa-lg"></i>
+        <div class="notification-badge">1</div>
+      </div>
+    </header>
+    <!-- Navigation Drawer -->
+    <nav class="nav-drawer" id="navDrawer">
+      <div class="drawer-top">
+        <div class="app-logo">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div id="app_version" class="app-version">Version 1.0-Starter</div>
+      </div>
+      <div class="drawer-bottom">
+        <div class="nav-item">
+          <i class="fas fa-shopping-cart"></i>
+          <span data-i18n="buy">Acheter</span>
+        </div>
+        <div class="nav-item">
+          <i class="fas fa-hand-holding-usd"></i>
+          <span data-i18n="sell">Vendre</span>
+        </div>
+        <div class="nav-item">
+          <i class="fas fa-key"></i>
+          <span data-i18n="set_pswd"></span>
+        </div>
+        <div class="nav-item">
+          <i class="fas fa-lock"></i>
+          <span data-i18n="set_sp"></span>
+        </div>
+        <div class="nav-item">
+          <i class="fas fa-sign-out-alt"></i>
+          <span data-i18n="quit_device"></span>
+        </div>
+        <div class="nav-item">
+          <i class="fas fa-trash-alt"></i>
+          <span data-i18n="delete_acc"></span>
+        </div>
+        <div class="nav-item">
+          <i class="fas fa-envelope"></i>
+          <span data-i18n="mail_us"></span>
+        </div>
+        <div class="nav-item">
+          <i class="fas fa-file-contract"></i>
+          <span data-i18n="terms"></span>
+        </div>
+        <div class="nav-item">
+          <i class="fas fa-user-shield"></i>
+          <span data-i18n="privacy"></span>
+        </div>
+      </div>
+    </nav>
 
-<body>
-  <!-- App Header -->
-  <header class="app-header">
-    <div class="header-button" id="menuButton">
-      <i class="fas fa-bars fa-lg"></i>
+    <div class="right-drawer-overlay"></div>
+    <div class="right-drawer">
+      <iframe
+        title="Right menu"
+        id="homeIframe"
+        class="right-iframe"
+        background="transparent"
+      ></iframe>
     </div>
-    <div class="header-title" data-i18n="welcome"></div>
-    <div class="header-button" id="notificationButton">
-      <i class="fas fa-bell fa-lg"></i>
-      <div class="notification-badge">1</div>
-    </div>
-  </header>
-  <!-- Navigation Drawer -->
-  <nav class="nav-drawer" id="navDrawer">
-    <div class="drawer-top">
-      <div class="app-logo">
-        <i class="fas fa-shield-alt"></i>
-      </div>
-      <div id="app_version" class="app-version">Version 1.0-Starter</div>
-    </div>
-    <div class="drawer-bottom">
-      <div class="nav-item">
-        <i class="fas fa-shopping-cart"></i>
-        <span data-i18n="buy">Acheter</span>
-      </div>
-      <div class="nav-item">
-        <i class="fas fa-hand-holding-usd"></i>
-        <span data-i18n="sell">Vendre</span>
-      </div>
-      <div class="nav-item">
-        <i class="fas fa-key"></i>
-        <span data-i18n="set_pswd"></span>
-      </div>
-      <div class="nav-item">
-        <i class="fas fa-lock"></i>
-        <span data-i18n="set_sp"></span>
-      </div>
-      <div class="nav-item">
-        <i class="fas fa-sign-out-alt"></i>
-        <span data-i18n="quit_device"></span>
-      </div>
-      <div class="nav-item">
-        <i class="fas fa-trash-alt"></i>
-        <span data-i18n="delete_acc"></span>
-      </div>
-      <div class="nav-item">
-        <i class="fas fa-envelope"></i>
-        <span data-i18n="mail_us"></span>
-      </div>
-      <div class="nav-item">
-        <i class="fas fa-file-contract"></i>
-        <span data-i18n="terms"></span>
-      </div>
-      <div class="nav-item">
-        <i class="fas fa-user-shield"></i>
-        <span data-i18n="privacy"></span>
-      </div>
-    </div>
-  </nav>
+    <div class="overlay" id="overlay"></div>
 
-  <div class="right-drawer-overlay"></div>
-  <div class="right-drawer"><iframe title="Right menu" id="homeIframe" class="right-iframe"
-      background="transparent"></iframe></div>
-  <div class="overlay" id="overlay"></div>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <div class="balance-container">
-      <div class="balance-label" font-family="balance-font, sans-serif;" data-i18n="balance"></div>
-      <div id="balance_value" class="balance-value" font-family="balance-font, sans-serif">0<span
-          class="balance-change">+0%</span></div>
-    </div>
-
-    <div class="tab-container">
-      <div width="100vw">
-        <button type="button" class="consolidate-btn" data-i18n="grow_onex">Consolidate Community</button>
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="balance-container">
+        <div
+          class="balance-label"
+          font-family="balance-font, sans-serif;"
+          data-i18n="balance"
+        ></div>
+        <div
+          id="balance_value"
+          class="balance-value"
+          font-family="balance-font, sans-serif"
+        >
+          0<span class="balance-change">+0%</span>
+        </div>
       </div>
-      <div class="tab-header">
-        <div class="tab-option active" data-tab="activities" data-i18n="activities"></div>
-        <div class="tab-option" data-tab="buy" data-i18n="buy"></div>
-        <div class="tab-option" data-tab="sell" data-i18n="sell"></div>
+
+      <div class="tab-container">
+        <div width="100vw">
+          <button type="button" class="consolidate-btn" data-i18n="grow_onex">
+            Consolidate Community
+          </button>
+        </div>
+        <div class="tab-header">
+          <div
+            class="tab-option active"
+            data-tab="activities"
+            data-i18n="activities"
+          ></div>
+          <div class="tab-option" data-tab="buy" data-i18n="buy"></div>
+          <div class="tab-option" data-tab="sell" data-i18n="sell"></div>
+        </div>
+        <div class="tab-content">
+          <iframe
+            title="tabs"
+            class="tab-iframe"
+            id="tabIframe"
+            src="about:blank"
+          ></iframe>
+        </div>
       </div>
-      <div class="tab-content">
-        <iframe title="tabs" class="tab-iframe" id="tabIframe" src="about:blank"></iframe>
+    </main>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notificationPanel">
+      <div class="notification-header" data-i18n="notification"></div>
+      <div class="notification-item">
+        <div id="notif_title" class="notification-title">Notification</div>
+        <div id="notif_text" class="notification-text">
+          New notification displays here
+        </div>
+        <div id="notif_time" class="notification-time">Time</div>
       </div>
     </div>
-  </main>
-
-  <!-- Notification Panel -->
-  <div class="notification-panel" id="notificationPanel">
-    <div class="notification-header" data-i18n="notification"></div>
-    <div class="notification-item">
-      <div id="notif_title" class="notification-title">Notification</div>
-      <div id="notif_text" class="notification-text">New notification displays here</div>
-      <div id="notif_time" class="notification-time">Time</div>
-    </div>
-  </div>
-  <script src="scripts/home.js"></script>
-</body>
-
+    <script src="scripts/home.js"></script>
+  </body>
 </html>
