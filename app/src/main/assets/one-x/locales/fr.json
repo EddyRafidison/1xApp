@@ -62,7 +62,10 @@
     "no_notif": "Aucune notification",
     "new_connection": "Il semble que cet appareil n'est pas reconnu par le serveur. Ce compte vous appartient réellement ? Entrez la phrase secrète.",
     "buy_success": "Demande d'achat accordée",
-    "sell_success": "Vente réussie"
+    "sell_success": "Vente réussie",
+    "last_clickers": "Derniers cliqueurs",
+    "last_sellers": "Derniers vendeurs",
+    "last_buyers": "Derniers acheteurs"
   },
   "countries": {
     "DZ": "Algérie",
