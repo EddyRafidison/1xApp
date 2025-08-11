@@ -9,6 +9,7 @@ html {
 }
 html,
 body {
+  font-family: Sans-Serif;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -37,14 +38,14 @@ form {
 }
 
 .action-bar {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   height: 4em;
   background-color: #2196f3;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .form-section {
@@ -58,7 +59,7 @@ form {
 
 .input {
   width: 17em;
-  height: 3.8em;
+  height: 3em;
   margin: 0.5em;
   align-self: center;
   border-radius: 0.4em;
@@ -87,9 +88,10 @@ label {
   display: inline-block;
   overflow: hidden;
   position: relative;
-  width: 17em;
-  height: 3.8em;
-  border-radius: 1.1em;
+  width: 15em;
+  height: 2.7em;
+  font-weight: 600;
+  border-radius: 1em;
   font-size: 1.1rem;
   color: white;
   text-align: center;
@@ -116,9 +118,9 @@ button:active {
   background-color: #ffffff;
   transform: translateY(calc(100% - 4em));
   transition: transform 0.4s ease-in-out;
-  border-top-left-radius: 3.8em;
-  border-top-right-radius: 3.8em;
-  box-shadow: 0 -0.2em 3.8em rgba(0, 0, 0, 0.2);
+  border-top-left-radius: 3.4em;
+  border-top-right-radius: 3.4em;
+  box-shadow: 0 -0.2em 3.4em rgba(0, 0, 0, 0.2);
   z-index: 99;
   display: flex;
   flex-direction: column;
@@ -131,10 +133,10 @@ button:active {
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border-top-left-radius: 3.4em;
-  border-top-right-radius: 3.4em;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-top-left-radius: 2.8em;
+  border-top-right-radius: 2.8em;
   cursor: pointer;
   touch-action: manipulation;
 }

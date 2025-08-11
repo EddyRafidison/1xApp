@@ -24,15 +24,15 @@ label {
   width: 17em;
   align-content: start;
   align-self: center;
+  margin-top: 0.2em;
   font-size: 1rem;
 }
 
 .input {
   width: 17em;
-  height: 1.9em;
-  margin-top: 0.2em;
+  height: 1.5em;
   align-self: center;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
   margin-left: 0.5em;
   margin-right: 0.5em;
   border-radius: 0.2em;
@@ -44,9 +44,9 @@ label {
 
 select {
   width: 17em;
-  height: 3.4em;
+  height: 3em;
   margin-top: 0.2em;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
   margin-left: 0.5em;
   margin-right: 0.5em;
   align-self: center;
@@ -59,9 +59,7 @@ select {
 .file {
   align-self: center;
   width: 17em;
-  height: 3.4em;
-  margin-top: 0.2em;
-  margin-bottom: 0.5em;
+  height: 3em;
   margin-left: 0.5em;
   margin-right: 0.5em;
   font-size: 1rem;
@@ -81,13 +79,14 @@ button {
   border: none;
   align-self: center;
   text-align: center;
-  width: 17em;
-  height: 3.4em;
+  width: 15em;
+  font-weight: 600;
+  height: 2.7em;
   margin-top: 0.2em;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
   margin-left: 0.5em;
   margin-right: 0.5em;
-  font-size: 1.1em;
+  font-size: 1.1rem;
 }
 
 button:focus {

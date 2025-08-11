@@ -2,7 +2,7 @@ html {
 font-size: 16px;
 }
 body {
-font-family: 'general', sans-serif;
+font-family: sans-serif;
 display: flex;
 justify-content: center;
 min-height: 100vh;
@@ -13,7 +13,7 @@ background-color: #00000000;
 .password-form {
 width: 100%;
 max-width: 400px;
-padding: 30px;
+padding: 1em;
 box-sizing: border-box;
 display: flex;
 flex-direction: column;
@@ -22,24 +22,52 @@ gap: 20px;
 
 .form-text {
 text-align: left;
+max-width: 19em;
 text-justify: auto;
 color: #F1EFBE;
+align-self: center;
 font-size: 1rem;
-font-weight: 600;
 margin-bottom: 0.6em;
 }
 
 .form-input {
 width: 100%;
+max-width: 17em;
 padding: 1em;
+height: 3em;
 margin-bottom: 0.6em;
+align-self: center;
 box-sizing: border-box;
-border: 0.1em solid #736BFE;
+border: 0.05em solid #736BFE;
 background-color: #f8f8f8;
 border-radius: 0.5em;
 font-size: 1rem;
 outline: none;
 transition: border-color 0.3s ease;
+}
+
+#message {
+width: 100%;
+max-width: 17em;
+padding: 1em;
+font-family: inherit;
+margin-bottom: 10px;
+box-sizing: border-box;
+border: 0.05em solid #736bfe;
+background-color: #f8f8f8;
+border-radius: 0.5em;
+font-size: 1rem;
+outline: none;
+transition: border-color 0.3s ease;
+}
+
+#message:focus {
+border-color: #ffa500;
+box-shadow: 0 0 0 0.2em rgba(255, 215, 0, 0.2);
+}
+
+#message::placeholder {
+color: #999;
 }
 
 .form-input:focus {
@@ -52,14 +80,20 @@ color: #999;
 }
 
 .submit-btn {
-width: 100%;
-padding: 1em;
+display: inline-block;
+overflow: hidden;
+position: relative;
+width: 14em;
+padding: 0.5em;
+height: 2.7em;
 background-color: #4CAF50;
 color: white;
 border: none;
+align-self: center;
+text-align: center;
+font-weight: 500;
 border-radius: 0.5em;
 font-size: 1.1rem;
-font-weight: 600;
 cursor: pointer;
 transition: background-color 0.3s ease, transform 0.2s ease;
 }
